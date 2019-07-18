@@ -1,0 +1,135 @@
+<template>
+	<view class="feedback">
+		<view class="header">
+			<text class="text">意见主题</text>
+			<image class="img" src="../../../../static/images/arrow-down.png"></image>
+		</view>
+		<view class="content">
+			<view class="suggest">
+				<textarea class="textarea" placeholder="请填写10个字以上的问题描述，以便我们提供更好的帮助！"/>
+			</view>
+			<view class="picture">
+				<view class="title">
+					相关截图(选填)
+				</view>
+				<view class="upload">
+					<image class="upload-pic" src="../../../../static/images/add-picture.png"></image>
+				</view>
+			</view>
+		</view>
+		<view class="supply">
+			<view class="tip">输入有效联系方式以便开发者联系你</view>
+			<view class="contact">
+				<text class="label">联系方式</text>
+				<input class="ipt" name="name" placeholder="手机号/邮箱" />
+			</view>
+			<view class="chkbox">
+				<checkbox class="chk" value="cb" />允许开发者在48小时内通过客服消息联系我
+			</view>
+		</view>
+		<view class="submit">
+			提交
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.feedback {
+		padding : 36rpx 30rpx 0;
+		.header {
+			display: flex;
+			align-items: center;
+			height: 88rpx;
+			padding: 0 36rpx;
+			background-color: #fff;
+			box-shadow: 0px 2rpx 6rpx 0px rgba(0,0,0,0.06);
+			border-radius: 4rpx;
+			.text {
+				flex: 1;
+				font-size: 32rpx;
+			}
+			.img {
+				width: 26rpx;
+				height: 16rpx;
+			}
+		}
+		.content {
+			margin-top: 20rpx;
+			padding: 36rpx;
+			background-color: #fff;
+			.suggest {
+				display: flex;
+				padding-bottom: 36rpx;
+				border-bottom: 2rpx solid #E0E0E0;
+				.textarea {
+					height: 200rpx;
+					font-size: 28rpx;
+					line-height: 36rpx;
+					color: #989898;
+				}
+			}
+			.picture {
+				.title {
+					height: 40rpx;
+					line-height: 40rpx;
+					margin: 24rpx 0;
+					font-size: 28rpx;
+				}
+				.upload {
+					display: flex;
+					.upload-pic {
+						width: 128rpx;
+						height: 128rpx;
+					}
+				}
+			}
+		}
+		.supply {
+			margin: 36rpx 0 54rpx; 
+			.tip, .chkbox {
+				line-height: 36rpx;
+				font-size: 32rpx;
+				color:rgba(128,128,128,1)
+			}
+			.chkbox {
+				.chk {
+					margin-right: 20rpx;
+					vertical-align: middle;
+				}
+			}
+			.contact {
+				display: flex;
+				align-items: center;
+				height: 90rpx;
+				margin: 10rpx 0;
+				padding: 0 36rpx;
+				line-height: 90rpx;
+				background-color: #fff;
+				box-shadow: 0px 2rpx 6rpx 0px rgba(0,0,0,0.06);
+				border-radius: 4rpx;
+				.label {
+					width: 130rpx;
+					margin-right: 30rpx;
+					text-align: left;
+					font-size: 32rpx;
+					color: #4A4A4A;
+				}
+				.ipt {
+					flex: 1;
+					font-size: 28rpx;
+					color: #808080;
+				}
+			}
+		}
+	}
+</style>

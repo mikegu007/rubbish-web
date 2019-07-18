@@ -1,0 +1,1 @@
+<view class="map-wrapper"><cover-view class="header"><text>下单</text><text class="active">接单</text></cover-view><map class="map" markers="{{covers}}"></map><cover-view class="controls"></cover-view></view>

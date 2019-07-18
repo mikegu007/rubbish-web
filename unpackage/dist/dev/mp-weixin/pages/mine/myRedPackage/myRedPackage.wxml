@@ -1,0 +1,1 @@
+<view class="red-packet data-v-1891d786"><red-item vue-id="1" class="data-v-1891d786" bind:__l="__l"></red-item><red-item vue-id="2" disabled="{{true}}" class="data-v-1891d786" bind:__l="__l"></red-item></view>
