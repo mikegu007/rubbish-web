@@ -61,8 +61,7 @@
 					success: function (res) {
 						// console.log(res)
 						if (res.confirm) {
-							uni.navigateBack({
-							})
+							uni.navigateBack({})
 						}
 					}
 				});

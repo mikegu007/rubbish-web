@@ -55,7 +55,7 @@
 				}
 				.text {
 					flex: 1;
-					font-size: 36rpx;
+					font-size: 32rpx;
 					margin-left: 12rpx;
 				}
 				.indictor {

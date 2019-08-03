@@ -24,15 +24,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.address-edit.data-v-6234996a {
+.address-edit.data-v-6f9147b8 {
   padding: 30rpx 30rpx 0;
 }
-.address-edit .info.data-v-6234996a {
+.address-edit .info.data-v-6f9147b8 {
     padding: 36rpx;
     border-radius: 8rpx;
     background-color: #fff;
 }
-.address-edit .info .form-item.data-v-6234996a {
+.address-edit .info .form-item.data-v-6f9147b8 {
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -45,16 +45,16 @@
       line-height: 76rpx;
       border-bottom: 2rpx solid #E0E0E0;
 }
-.address-edit .info .form-item.data-v-6234996a:last-child {
+.address-edit .info .form-item.data-v-6f9147b8:last-child {
         border-bottom: 0;
 }
-.address-edit .info .form-item .label.data-v-6234996a {
+.address-edit .info .form-item .label.data-v-6f9147b8 {
         width: 120rpx;
         text-align: left;
         font-size: 32rpx;
         color: #4A4A4A;
 }
-.address-edit .info .form-item .ipt.data-v-6234996a {
+.address-edit .info .form-item .ipt.data-v-6f9147b8 {
         -webkit-box-flex: 1;
         -webkit-flex: 1;
             -ms-flex: 1;
@@ -62,11 +62,11 @@
         font-size: 28rpx;
         color: #808080;
 }
-.address-edit .info .form-item .indictor.data-v-6234996a {
+.address-edit .info .form-item .indictor.data-v-6f9147b8 {
         width: 16rpx;
         height: 26rpx;
 }
-.address-edit .info .form-item .group.data-v-6234996a {
+.address-edit .info .form-item .group.data-v-6f9147b8 {
         -webkit-box-flex: 1;
         -webkit-flex: 1;
             -ms-flex: 1;
@@ -80,7 +80,7 @@
             -ms-flex-align: center;
                 align-items: center;
 }
-.address-edit .info .form-item .group .radio.data-v-6234996a {
+.address-edit .info .form-item .group .radio.data-v-6f9147b8 {
           width: 100rpx;
           height: 48rpx;
           margin-right: 20rpx;
@@ -91,12 +91,12 @@
           color: #808080;
           font-size: 30rpx;
 }
-.address-edit .info .form-item .group .radio.active.data-v-6234996a {
+.address-edit .info .form-item .group .radio.active.data-v-6f9147b8 {
             background-color: #ecf7f3;
             color: #1DA06E;
             border-color: #c2e5d8;
 }
-.address-edit .del.data-v-6234996a {
+.address-edit .del.data-v-6f9147b8 {
     height: 88rpx;
     line-height: 88rpx;
     font-size: 32rpx;

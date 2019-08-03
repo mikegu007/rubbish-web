@@ -4,7 +4,7 @@
 			<text>下单</text>
 			<text class="active">接单</text>
 		</cover-view>
-		<map v-if="" class="map" :markers="covers"></map>
+		<map class="map" :markers="covers"></map>
 		<cover-view class="controls"></cover-view>
 	</view>
 </template>

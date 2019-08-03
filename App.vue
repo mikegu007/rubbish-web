@@ -17,10 +17,10 @@
 	page {
 		height: 100%;
 		background-color: #F8F8F8;
-		font-size: 26rpx;
-		font-family:PingFangSC-Regular;
-		color:rgba(74,74,74,1);
-		line-height:42px;
+		font-size: 28rpx;
+		font-family: PingFangSC-Regular;
+		color: rgba(74,74,74,1);
+		line-height: 36rpx;
 	}
 	.extend-click {
 		position: relative;
@@ -37,10 +37,23 @@
 		height: 90rpx;
 		border-radius: 45rpx;
 		// margin: 0 30rpx;
-		font-size: 40rpx;
+		font-size: 36rpx;
 		line-height: 90rpx;
 		text-align: center;
 		color: #fff;
 		background-color: rgba(29,160,110,1);
+	}
+	.btn {
+		height: 90rpx;
+		line-height: 90rpx;
+		font-size: 32rpx;
+		background: #fff;
+		border-radius: 4rpx;
+		text-align: center;
+	}
+	
+	.indictor {
+		width: 16rpx;
+		height: 26rpx;
 	}
 </style>

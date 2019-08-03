@@ -4,7 +4,7 @@
 		<!-- <hello></hello> -->
 		<view class="others">
 			<text class="title">其他地址</text>
-			<address-item class="other" v-for="item in addressList.others" @eidt="goEdit"></address-item>
+			<address-item class="other" v-for="item in addressList.others" :key="item.id" @eidt="goEdit"></address-item>
 		</view>
 	</view>
 </template>
@@ -20,7 +20,11 @@
 			return {
 				addressList: {
 					default: {},
-					others: [{}, {}, {}]
+					others: [
+						{ id: 0 }, 
+						{ id: 1 }, 
+						{ id: 2}
+					]
 				}
 			};
 		},
@@ -40,6 +44,7 @@
 <style lang="scss" scoped>
 	.myaddress {
 		.others {
+			margin-top: 10rpx;
 			.other {
 				margin-bottom: 30rpx;
 			}

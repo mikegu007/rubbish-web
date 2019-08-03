@@ -102,8 +102,11 @@
 				color:rgba(128,128,128,1)
 			}
 			.chkbox {
+				height: 36rpx;
+				display: flex;
+				align-items: center;
 				.chk {
-					margin-right: 20rpx;
+					margin-right: 10rpx;
 					vertical-align: middle;
 				}
 			}

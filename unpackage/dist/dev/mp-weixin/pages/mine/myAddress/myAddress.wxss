@@ -24,10 +24,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.myaddress .others .other.data-v-a65acb10 {
-  margin-bottom: 30rpx;
+.myaddress .others.data-v-094cacea {
+  margin-top: 10rpx;
 }
-.myaddress .others .title.data-v-a65acb10 {
-  margin-left: 30rpx;
+.myaddress .others .other.data-v-094cacea {
+    margin-bottom: 30rpx;
+}
+.myaddress .others .title.data-v-094cacea {
+    margin-left: 30rpx;
 }
 

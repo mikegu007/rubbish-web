@@ -24,7 +24,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.address.data-v-3741227a {
+.address.data-v-8dc7c796 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -40,7 +40,7 @@
           box-shadow: 0px 2rpx 6rpx 2rpx rgba(0, 0, 0, 0.06);
   border-radius: 8rpx;
 }
-.address .edit.data-v-3741227a {
+.address .edit.data-v-8dc7c796 {
     height: 36rpx;
     padding-left: 20rpx;
     font-size: 32rpx;
@@ -48,24 +48,24 @@
     color: #989898;
     border-left: 2rpx solid #E0E0E0;
 }
-.address .detail.data-v-3741227a {
+.address .detail.data-v-8dc7c796 {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
         -ms-flex: 1;
             flex: 1;
 }
-.address .detail .buildings.data-v-3741227a {
+.address .detail .buildings.data-v-8dc7c796 {
       color: #4a4a4a;
       font-size: 32rpx;
       line-height: 42rpx;
 }
-.address .detail .road.data-v-3741227a {
+.address .detail .road.data-v-8dc7c796 {
       font-weight: 400;
       color: #666666;
       font-size: 28rpx;
       line-height: 36rpx;
 }
-.address .detail .personal.data-v-3741227a {
+.address .detail .personal.data-v-8dc7c796 {
       color: #a2a2a2;
       line-height: 30rpx;
       font-size: 24rpx;

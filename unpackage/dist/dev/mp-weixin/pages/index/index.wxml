@@ -1,1 +1,0 @@
-<view class="content data-v-e128591c"><view class="text-area data-v-e128591c"><text data-event-opts="{{[['tap',[['getLocation',['$event']]]]]}}" class="title data-v-e128591c" bindtap="__e">{{title}}</text></view></view>

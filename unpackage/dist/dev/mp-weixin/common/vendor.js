@@ -1,5 +1,372 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
+/***/ "../../../../../volcano/develop/my-uniapp/main.js":
+/*!********************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../../volcano/develop/my-uniapp/App.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+_vue.default.config.productionTip = false;
+
+_vue.default.filter('timeFilter', function (val) {
+  var min = parseInt(val / 60);
+  min = min < 10 ? "0".concat(min) : min;
+  var second = val % 60;
+  second = second < 10 ? "0".concat(second) : second;
+  return "".concat(min, ":").concat(second);
+});
+
+_App.default.mpType = 'app';
+
+var app = new _vue.default(_objectSpread({},
+_App.default));
+
+createApp(app).$mount();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createApp"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Findex%2Fnotify%2Fnotify\"}":
+/*!***************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Findex%2Fnotify%2Fnotify"} ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _notify = _interopRequireDefault(__webpack_require__(/*! ./pages/index/notify/notify.vue */ "../../../../../volcano/develop/my-uniapp/pages/index/notify/notify.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_notify.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Findex%2Frank%2Frank\"}":
+/*!***********************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Findex%2Frank%2Frank"} ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _rank = _interopRequireDefault(__webpack_require__(/*! ./pages/index/rank/rank.vue */ "../../../../../volcano/develop/my-uniapp/pages/index/rank/rank.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_rank.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Findex%2Fstrategy%2Fstrategy\"}":
+/*!*******************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Findex%2Fstrategy%2Fstrategy"} ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _strategy = _interopRequireDefault(__webpack_require__(/*! ./pages/index/strategy/strategy.vue */ "../../../../../volcano/develop/my-uniapp/pages/index/strategy/strategy.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_strategy.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Findex%2Fupdatings%2Fupdatings\"}":
+/*!*********************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Findex%2Fupdatings%2Fupdatings"} ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _updatings = _interopRequireDefault(__webpack_require__(/*! ./pages/index/updatings/updatings.vue */ "../../../../../volcano/develop/my-uniapp/pages/index/updatings/updatings.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_updatings.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyAddress%2Fedit\"}":
+/*!***************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyAddress%2Fedit"} ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _edit = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myAddress/edit.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myAddress/edit.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_edit.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyAddress%2FmyAddress\"}":
+/*!********************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyAddress%2FmyAddress"} ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _myAddress = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myAddress/myAddress.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myAddress/myAddress.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_myAddress.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyOrder%2FmyOrder\"}":
+/*!****************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyOrder%2FmyOrder"} ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _myOrder = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myOrder/myOrder.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myOrder/myOrder.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_myOrder.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyRedPackage%2FmyRedPackage\"}":
+/*!**************************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRedPackage%2FmyRedPackage"} ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _myRedPackage = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRedPackage/myRedPackage.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myRedPackage/myRedPackage.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_myRedPackage.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyRule%2Ffeedback%2Ffeedback\"}":
+/*!***************************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRule%2Ffeedback%2Ffeedback"} ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _feedback = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRule/feedback/feedback.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myRule/feedback/feedback.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_feedback.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyRule%2FmyRule\"}":
+/*!**************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRule%2FmyRule"} ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _myRule = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRule/myRule.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myRule/myRule.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_myRule.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Fmine%2FmyRule%2Fprivacy%2Fprivacy\"}":
+/*!*************************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRule%2Fprivacy%2Fprivacy"} ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _privacy = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRule/privacy/privacy.vue */ "../../../../../volcano/develop/my-uniapp/pages/mine/myRule/privacy/privacy.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_privacy.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2FaddressSetting%2FaddressSetting\"}":
+/*!*******************************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2FaddressSetting%2FaddressSetting"} ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _addressSetting = _interopRequireDefault(__webpack_require__(/*! ./pages/order/addressSetting/addressSetting.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/addressSetting/addressSetting.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_addressSetting.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2FcancelOrder%2FcancelOrder\"}":
+/*!*************************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2FcancelOrder%2FcancelOrder"} ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _cancelOrder = _interopRequireDefault(__webpack_require__(/*! ./pages/order/cancelOrder/cancelOrder.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/cancelOrder/cancelOrder.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_cancelOrder.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2Fdetail%2Fdetail\"}":
+/*!***************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2Fdetail%2Fdetail"} ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _detail = _interopRequireDefault(__webpack_require__(/*! ./pages/order/detail/detail.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/detail/detail.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_detail.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2Flocation%2Flocation\"}":
+/*!*******************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2Flocation%2Flocation"} ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _location = _interopRequireDefault(__webpack_require__(/*! ./pages/order/location/location.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/location/location.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_location.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2Fremark%2Fremark\"}":
+/*!***************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2Fremark%2Fremark"} ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _remark = _interopRequireDefault(__webpack_require__(/*! ./pages/order/remark/remark.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/remark/remark.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_remark.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2FtabBar%2Findex\"}":
+/*!******************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2FtabBar%2Findex"} ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/tabBar/index.vue */ "../../../../../volcano/develop/my-uniapp/pages/tabBar/index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2FtabBar%2Fmine\"}":
+/*!*****************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2FtabBar%2Fmine"} ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _mine = _interopRequireDefault(__webpack_require__(/*! ./pages/tabBar/mine.vue */ "../../../../../volcano/develop/my-uniapp/pages/tabBar/mine.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_mine.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2FtabBar%2Forder\"}":
+/*!******************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2FtabBar%2Forder"} ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _order = _interopRequireDefault(__webpack_require__(/*! ./pages/tabBar/order.vue */ "../../../../../volcano/develop/my-uniapp/pages/tabBar/order.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_order.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../volcano/develop/my-uniapp/pages.json":
+/*!***********************************************!*\
+  !*** E:/volcano/develop/my-uniapp/pages.json ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
@@ -541,7 +908,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6744,7 +7111,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -6765,14 +7132,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -6848,7 +7215,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8139,263 +8506,6 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
-
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js":
-/*!********************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "E:\\volcano\\develop\\my-uniapp\\App.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
-
-_vue.default.config.productionTip = false;
-
-_App.default.mpType = 'app';
-
-var app = new _vue.default(_objectSpread({},
-_App.default));
-
-createApp(app).$mount();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createApp"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Findex%2Findex\"}":
-/*!*****************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \*****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\index\\index.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmap%2Fmap\"}":
-/*!*************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmap%2Fmap"} ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _map = _interopRequireDefault(__webpack_require__(/*! ./pages/map/map.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\map\\map.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_map.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2Fmine\"}":
-/*!***************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2Fmine"} ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _mine = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/mine.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\mine.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_mine.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyAddress%2Fedit\"}":
-/*!***************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyAddress%2Fedit"} ***!
-  \***************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _edit = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myAddress/edit.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myAddress\\edit.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_edit.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyAddress%2FmyAddress\"}":
-/*!********************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyAddress%2FmyAddress"} ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _myAddress = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myAddress/myAddress.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myAddress\\myAddress.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_myAddress.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyEnergy%2FmyEnergy\"}":
-/*!******************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyEnergy%2FmyEnergy"} ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _myEnergy = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myEnergy/myEnergy.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myEnergy\\myEnergy.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_myEnergy.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyOrder%2FmyOrder\"}":
-/*!****************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyOrder%2FmyOrder"} ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _myOrder = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myOrder/myOrder.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myOrder\\myOrder.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_myOrder.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyRedPackage%2FmyRedPackage\"}":
-/*!**************************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRedPackage%2FmyRedPackage"} ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _myRedPackage = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRedPackage/myRedPackage.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myRedPackage\\myRedPackage.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_myRedPackage.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyRule%2Ffeedback%2Ffeedback\"}":
-/*!***************************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRule%2Ffeedback%2Ffeedback"} ***!
-  \***************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _feedback = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRule/feedback/feedback.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myRule\\feedback\\feedback.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_feedback.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyRule%2FmyRule\"}":
-/*!**************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRule%2FmyRule"} ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _myRule = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRule/myRule.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myRule\\myRule.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_myRule.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyRule%2Fprivacy%2Fprivacy\"}":
-/*!*************************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyRule%2Fprivacy%2Fprivacy"} ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _privacy = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myRule/privacy/privacy.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myRule\\privacy\\privacy.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_privacy.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Fmine%2FmyService%2FmyService\"}":
-/*!********************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Fmine%2FmyService%2FmyService"} ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _myService = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/myService/myService.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\mine\\myService\\myService.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_myService.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\main.js?{\"page\":\"pages%2Forder%2Forder\"}":
-/*!*****************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2Forder"} ***!
-  \*****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "E:\\volcano\\develop\\my-uniapp\\pages.json");
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _order = _interopRequireDefault(__webpack_require__(/*! ./pages/order/order.vue */ "E:\\volcano\\develop\\my-uniapp\\pages\\order\\order.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_order.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
-
-/***/ }),
-
-/***/ "E:\\volcano\\develop\\my-uniapp\\pages.json":
-/*!***********************************************!*\
-  !*** E:/volcano/develop/my-uniapp/pages.json ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
 /***/ })

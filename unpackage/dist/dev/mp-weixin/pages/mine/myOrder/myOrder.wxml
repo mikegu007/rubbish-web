@@ -1,1 +1,1 @@
-<view class="data-v-2eaa20ec"></view>
+<view class="myorder-wrapper data-v-66398744"><block wx:for="{{orderList}}" wx:for-item="order" wx:for-index="__i0__" wx:key="id"><order-item vue-id="{{'1-'+__i0__}}" orderItem="{{order}}" class="data-v-66398744" bind:__l="__l"></order-item></block></view>

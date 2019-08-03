@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <view class="map-wrapper">
+		<view class="header">
+			<view class="personal">
+				<image class="avator" src="../../static/images/avator.png"></image>
+				<view class="info">
+					<view class="name">Sebastian Bennett</view>
+					<image class="level" src="../../static/images/rank.png"></image>
+				</view>
+			</view>
+			<!-- 红包 -->
+			<view class="red-packet" @tap="goRedPackage">
+				<view class="left">
+					<view class="title">红包</view>
+					<view class="content"><text class="num">3</text>个未使用</view>
+				</view>
+				<view class="right extend-click"></view>
+			</view>
+			<!-- 能量 -->
+			<view class="energy">
+				<view class="left">
+					<view class="title">能量</view>
+					<view class="content"><text class="num">13.8</text>kg</view>
+				</view>
+				<view class="right extend-click"></view>
+			</view>
+		</view>
+		<view class="category">
+			<view class="item" @tap="goMyAddress">
+				<image class="img" src="../../static/images/address.png"></image>
+				<text class="text">我的地址</text>
+				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+			</view>
+			<view class="item" @tap="goMyOrder">
+				<image class="img" src="../../static/images/order.png"></image>
+				<text class="text">我的订单</text>
+				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+			</view>
+			<view class="item" @tap="goMyEnergy">
+				<view  class="img" src="../../static/images/mall.png"></view>
+				<text class="text">能量商场</text>
+				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+			</view>
+			<view class="item"  @tap="goMyService">
+				<image class="img" src="../../static/images/service.png"></image>
+				<text class="text">我的客服</text>
+				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+			</view>
+			<view class="item"  @tap="goMyRule">
+				<image class="img" src="../../static/images/rule.png"></image>
+				<text class="text">规则中心</text>
+				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+			</view>
+		</view>
+		<view v-if="showService" class="mask">
+			<view class="footer">
+				<view class="service">
+					<view class="title">我的客服</view>
+					<view class="mobile">客服热线：123672736</view>
+				</view>
+				<view class="can" @tap="canService">取消</view>
+			</view>
+		</view>
+	</view>
+	</view>
+</body>
+</html>

@@ -1,18 +1,24 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/map/map",
-    "pages/order/order",
-    "pages/mine/mine",
+    "pages/tabBar/index",
+    "pages/tabBar/order",
+    "pages/tabBar/mine",
+    "pages/index/rank/rank",
+    "pages/index/updatings/updatings",
+    "pages/index/strategy/strategy",
+    "pages/index/notify/notify",
+    "pages/order/remark/remark",
+    "pages/order/cancelOrder/cancelOrder",
+    "pages/order/detail/detail",
+    "pages/order/addressSetting/addressSetting",
+    "pages/order/location/location",
     "pages/mine/myAddress/myAddress",
+    "pages/mine/myOrder/myOrder",
     "pages/mine/myAddress/edit",
     "pages/mine/myRule/myRule",
     "pages/mine/myRule/privacy/privacy",
     "pages/mine/myRule/feedback/feedback",
-    "pages/mine/myRedPackage/myRedPackage",
-    "pages/mine/myOrder/myOrder",
-    "pages/mine/myEnergy/myEnergy",
-    "pages/mine/myService/myService"
+    "pages/mine/myRedPackage/myRedPackage"
   ],
   "subPackages": [],
   "window": {
@@ -28,17 +34,19 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页"
+        "pagePath": "pages/tabBar/index",
+        "iconPath": "static/images/tabBar-index.png",
+        "selectedIconPath": "static/images/tabBar-index-active.png"
       },
       {
-        "pagePath": "pages/order/order",
-        "text": "订单"
+        "pagePath": "pages/tabBar/order",
+        "iconPath": "static/images/tabBar-myOrder.png",
+        "selectedIconPath": "static/images/tabBar-myOrder-active.png"
       },
       {
-        "pagePath": "pages/mine/mine",
-        "selectedIconPath": "static/images/mine.png",
-        "text": "我的"
+        "pagePath": "pages/tabBar/mine",
+        "iconPath": "static/images/tabBar-mine.png",
+        "selectedIconPath": "static/images/tabBar-mine-active.png"
       }
     ]
   },
@@ -47,6 +55,5 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

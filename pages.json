@@ -1,27 +1,21 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
-			"path": "pages/index/index",
+			"path": "pages/tabBar/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "环保家园"
 			}
 		},
 		{
-			"path" : "pages/map/map",
+			"path" : "pages/tabBar/order",
 			"style" : {
-				"navigationBarTitleText": "接单设置",
+				"navigationBarTitleText": "订单",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#1DA06E"
 			}
 		},
 		{
-			"path" : "pages/order/order",
-			"style" : {
-				"navigationBarTitleText": "订单"
-			}
-		},
-		{
-			"path" : "pages/mine/mine",
+			"path" : "pages/tabBar/mine",
 			"style" : {
 				"navigationBarTitleText": "我的",
 				"navigationBarTextStyle": "white",
@@ -29,9 +23,70 @@
 			}
 		},
 		{
+			"path": "pages/index/rank/rank",
+			"style": {
+				"navigationBarTitleText": "排行榜"
+			}
+		},
+		{
+			"path": "pages/index/updatings/updatings",
+			"style": {
+				"navigationBarTitleText": "更多动态"
+			}
+		},
+		{
+			"path" : "pages/index/strategy/strategy",
+			"style" : {
+				"navigationBarTitleText": "攻略"
+			}
+		},
+		{
+			"path" : "pages/index/notify/notify",
+			"style" : {
+				"navigationBarTitleText": "通知"
+			}
+		},
+		{
+			"path" : "pages/order/remark/remark",
+			"style" : {
+				"navigationBarTitleText": "订单备注"
+			}
+		},
+		{
+			"path" : "pages/order/cancelOrder/cancelOrder",
+			"style" : {
+				"navigationBarTitleText": "取消订单"
+			}
+		},
+		{
+			"path" : "pages/order/detail/detail",
+			"style" : {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path" : "pages/order/addressSetting/addressSetting",
+			"style" : {
+				"navigationBarTitleText": "接单设置"
+			}
+		},
+		{
+			"path" : "pages/order/location/location",
+			"style" : {
+				"navigationBarTitleText": "定位",
+				"navigationBarBackgroundColor": "#fff"
+			}
+		},
+		{
 			"path" : "pages/mine/myAddress/myAddress",
 			"style" : {
 				"navigationBarTitleText": "我的地址"
+			}
+		},
+		{
+			"path" : "pages/mine/myOrder/myOrder",
+			"style" : {
+				"navigationBarTitleText": "我的订单"
 			}
 		},
 		{
@@ -63,18 +118,6 @@
 			"style" : {
 				"navigationBarTitleText": "红包"
 			}
-		},
-		{
-			"path": "pages/mine/myOrder/myOrder",
-			"style" : {}
-		},
-		{
-			"path" : "pages/mine/myEnergy/myEnergy",
-			"style" : {}
-		},
-		{
-			"path" : "pages/mine/myService/myService",
-			"style" : {}
 		}
     ],
 	"globalStyle": {
@@ -89,20 +132,20 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/index/index",
-			// "iconPath": "static/image/icon_component.png",
-			// "selectedIconPath": "static/image/icon_component_HL.png",
-			"text": "首页"
+			"pagePath": "pages/tabBar/index",
+			"iconPath": "static/images/tabBar-index.png",
+			"selectedIconPath": "static/images/tabBar-index-active.png"
+			// "text": "首页"
 		}, {
-			"pagePath": "pages/order/order",
-			// "iconPath": "static/image/icon_API.png",
-			// "selectedIconPath": "static/image/icon_API_HL.png",
-			"text": "订单"
+			"pagePath": "pages/tabBar/order",
+			"iconPath": "static/images/tabBar-myOrder.png",
+			"selectedIconPath": "static/images/tabBar-myOrder-active.png"
+			// "text": "订单"
 		}, {
-			"pagePath": "pages/mine/mine",
-			// "iconPath": "static/image/icon_API.png",
-			"selectedIconPath": "static/images/mine.png",
-			"text": "我的"
+			"pagePath": "pages/tabBar/mine",
+			"iconPath": "static/images/tabBar-mine.png",
+			"selectedIconPath": "static/images/tabBar-mine-active.png"
+			// "text": "我的"
 		}]
   }
 }
