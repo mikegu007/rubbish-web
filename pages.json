@@ -1,7 +1,7 @@
 {
 	"pages": [
 		{
-			"path": "pages/tabBar/index",
+			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "环保家园"
 			}
@@ -67,7 +67,7 @@
 		{
 			"path" : "pages/order/addressSetting/addressSetting",
 			"style" : {
-				"navigationBarTitleText": "接单设置"
+				"navigationBarTitleText": "抢单设置"
 			}
 		},
 		{
@@ -132,20 +132,20 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/tabBar/index",
+			"pagePath": "pages/index/index",
 			"iconPath": "static/images/tabBar-index.png",
-			"selectedIconPath": "static/images/tabBar-index-active.png"
-			// "text": "首页"
+			"selectedIconPath": "static/images/tabBar-index-active.png",
+			"text": "首页"
 		}, {
 			"pagePath": "pages/tabBar/order",
 			"iconPath": "static/images/tabBar-myOrder.png",
-			"selectedIconPath": "static/images/tabBar-myOrder-active.png"
-			// "text": "订单"
+			"selectedIconPath": "static/images/tabBar-myOrder-active.png",
+			"text": "订单"
 		}, {
 			"pagePath": "pages/tabBar/mine",
 			"iconPath": "static/images/tabBar-mine.png",
-			"selectedIconPath": "static/images/tabBar-mine-active.png"
-			// "text": "我的"
+			"selectedIconPath": "static/images/tabBar-mine-active.png",
+			"text": "我的"
 		}]
   }
 }

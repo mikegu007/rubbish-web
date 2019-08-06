@@ -33,4 +33,30 @@
 .myaddress .others .title.data-v-094cacea {
     margin-left: 30rpx;
 }
+.myaddress .new.data-v-094cacea {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 90rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #fff;
+  font-size: 32rpx;
+  color: #1DA06E;
+}
+.myaddress .new .new-img.data-v-094cacea {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 10rpx;
+}
 

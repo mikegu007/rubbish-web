@@ -4,12 +4,14 @@
 		<cover-view v-if="type === 'coming'" class="controls">
       <cover-view class="order-info">
         <cover-view class="wait-txt">工作人员正飞速向您赶来，请耐心等待！</cover-view>
-        <cover-view class="wait-time">预计等待时间：10:00分钟</cover-view>
+        <cover-view class="wait-txt">预计等待时间：10:00分钟</cover-view>
+        <cover-view class="wait-time">工作人员电话：18663470166</cover-view>
         <cover-view class="tips">
-          <cover-image class="tips-img" src="../../../static/images/tips.png"></cover-image>
-          您可以在3分钟之内免费取消订单</cover-view>
+          <cover-image class="tips-img" src="/static/images/tips.png"></cover-image>
+          您可以在3分钟之内免费取消订单
+        </cover-view>
       </cover-view>
-      <cover-view class="submit">取消订单</cover-view>
+      <!-- <cover-view class="submit">取消订单</cover-view> -->
     </cover-view>
     <cover-view v-if="type === 'success'" class="success">
       <cover-view class="order-info suc-info">
@@ -17,7 +19,7 @@
         <cover-view class="wait-time suc-label">订单日期：2019-01-10 11:11</cover-view>
         <cover-view class="wait-time">垃圾类别：厕所垃圾+厨房垃圾+客厅垃圾+其他</cover-view>
         <cover-view class="suc-txt">
-          <cover-image class="suc-img" src="../../../static/images/success-green.png"></cover-image>
+          <cover-image class="suc-img" src="/static/images/success-green.png"></cover-image>
           订单金额：¥30
         </cover-view>
       </cover-view>
@@ -38,7 +40,7 @@
 					longitude: 116.39,
 					iconPath: '../../../static/images/map-pin.png'
         }],
-        type: 'success' // coming 接单中 success 完成
+        type: 'coming' // coming 抢单中 success 完成
 			}
 		}
   }
@@ -60,7 +62,7 @@
 			left: 4%;
       .order-info {
         box-sizing: border-box;
-			  height: 204rpx;
+			  height: 235rpx;
         padding: 36rpx 36rpx 0;
         margin-bottom: 24rpx;
 			  background-color: #fff;
@@ -94,7 +96,7 @@
           height: 65rpx;
           font-size: 24rpx;
           color: #F7B500;
-          .suc-img {
+          .tips-img {
             width: 30rpx;
             height: 30rpx;
             margin-right: 10rpx;

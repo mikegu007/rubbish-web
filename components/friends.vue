@@ -1,7 +1,7 @@
 <template name="friends">
 	<view class="friends-list">
 	<!-- <view :scroll-x="true" :enable-flex="true" class="friends-list"> -->
-		<view class="friend" v-for="(friend, index) in friendsList" :key="friend.id">
+		<view class="friend" v-for="friend in friendsList" :key="friend.id">
 			<image class="friend-pic" :src="friend.avator"></image>
 			<view class="friend-name">{{ friend.name }}</view>
 			<view class="friend-submit">加好友</view>
@@ -29,8 +29,7 @@
 		flex-wrap: nowrap;
 		overflow: auto;
 		.friend {
-			flex: 0 0 220rpx;
-			// width: 220rpx;
+			flex: 0 0 240rpx;
 			height: 322rpx;
 			display: flex;
 			flex-direction: column;

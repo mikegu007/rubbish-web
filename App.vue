@@ -1,13 +1,35 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			let appInfo = uni.getStorageSync('appInfo')
+			if (!appInfo) {
+				uni.login({
+					provider: 'weixin',
+					success: function (loginRes) {
+						console.log(loginRes);
+						if (loginRes.code) {
+							let appId = 'wx0c05632ffc644b36'
+							let appSecret = '8018b076c849cc483d07f6fe81a485f3'
+							uni.request({
+								url: `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${appSecret}&js_code=${loginRes.code}&grant_type=authorization_code`,
+								data: {
+									userInfoDto: '021akbX714euWL1vnpW71vFrX71akbXr'
+								}
+							})
+								.then(data => {
+									let [err, res] = data
+									if (res.data && res.data.openid && res.data.session_key) {
+										uni.setStorageSync('appInfo', JSON.stringify(res.data))
+									}
+								})
+						}
+					}
+				})
+			}
 		},
 		onShow: function() {
-			console.log('App Show')
 		},
 		onHide: function() {
-			console.log('App Hide')
 		}
 	}
 </script>

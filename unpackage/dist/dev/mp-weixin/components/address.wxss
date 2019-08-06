@@ -53,21 +53,36 @@
     -webkit-flex: 1;
         -ms-flex: 1;
             flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
-.address .detail .buildings.data-v-8dc7c796 {
-      color: #4a4a4a;
-      font-size: 32rpx;
-      line-height: 42rpx;
+.address .detail .address-img.data-v-8dc7c796 {
+      width: 28rpx;
+      height: 34rpx;
+      margin: 5rpx 24rpx 0 0;
 }
-.address .detail .road.data-v-8dc7c796 {
-      font-weight: 400;
-      color: #666666;
-      font-size: 28rpx;
-      line-height: 36rpx;
+.address .detail .info.data-v-8dc7c796 {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
 }
-.address .detail .personal.data-v-8dc7c796 {
-      color: #a2a2a2;
-      line-height: 30rpx;
-      font-size: 24rpx;
+.address .detail .info .buildings.data-v-8dc7c796 {
+        color: #4a4a4a;
+        font-size: 32rpx;
+        line-height: 42rpx;
+}
+.address .detail .info .road.data-v-8dc7c796 {
+        font-weight: 400;
+        color: #666666;
+        font-size: 28rpx;
+        line-height: 36rpx;
+}
+.address .detail .info .personal.data-v-8dc7c796 {
+        color: #a2a2a2;
+        line-height: 30rpx;
+        font-size: 24rpx;
 }
 

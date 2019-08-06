@@ -112,6 +112,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 {
   components: {
     'address-item': addressItem },
@@ -119,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       addressList: {
-        default: {},
+        default: { isCur: true }, // isCur是否是当前选中地址
         others: [
         { id: 0 },
         { id: 1 },
@@ -129,10 +133,14 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   onReady: function onReady() {
-    console.log('myAddress');
   },
   methods: {
     goEdit: function goEdit() {
+      uni.navigateTo({
+        url: './edit' });
+
+    },
+    goNew: function goNew() {
       uni.navigateTo({
         url: './edit' });
 

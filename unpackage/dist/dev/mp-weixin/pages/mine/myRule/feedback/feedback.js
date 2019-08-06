@@ -98,48 +98,60 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var vCheckbox = function vCheckbox() {return __webpack_require__.e(/*! import() | components/vCheckbox */ "components/vCheckbox").then(__webpack_require__.bind(null, /*! ../../../../components/vCheckbox */ "../../../../../volcano/develop/my-uniapp/components/vCheckbox.vue"));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
+  components: {
+    'v-checkbox': vCheckbox },
+
   data: function data() {
-    return {};
+    return {
+      form: {
+        active: false } };
 
 
-  } };exports.default = _default;
+  },
+  methods: {
+    checkStatus: function checkStatus(active) {
+      this.form.active = active;
+    } } };exports.default = _default;
 
 /***/ }),
 

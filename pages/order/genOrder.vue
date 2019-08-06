@@ -6,7 +6,7 @@
     </view>
     <view class="order-suc" v-if="type === 'success'">
       <image class="suc-pic" src="../../static/images/success-orange.png"></image>
-      <view class="suc-txt">接单成功</view>
+      <view class="suc-txt">抢单成功</view>
     </view>
     <view class="tip">{{ tips }}</view>
     <view class="next">
@@ -24,12 +24,12 @@
       return {
         time: 180,
         timer: null,
-        type: 'pending' // pending 等待中  success 成功接单
+        type: 'success' // pending 等待中  success 成功抢单
       }
     },
     computed: {
       tips() {
-        return this.type === 'pending' ? '您的订单已生成，等待接单！' : '已接单，请耐心等待工作人员上门！'
+        return this.type === 'pending' ? '您的订单已生成，等待抢单！' : '已抢单，请耐心等待工作人员上门！'
       }
     },
     // filters: {
@@ -115,7 +115,7 @@
       .count-time {
         color: #1DA06E;
         font-family:PingFangSC-Semibold;
-        font-size: 48rpx;
+        font-size: 40rpx;
         line-height: 56rpx;
       }
       .count-txt {

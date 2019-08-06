@@ -2,8 +2,8 @@
 	<view class="index">
 		<view class="header">
 			<!-- <image class="main-bg" v-if="curHours >= 6 && curHours < 18" src="../../static/images/day-time.png"></image> -->
-			<!-- <image class="main-bg" v-else src="../../static/images/night-time.png"></image> -->
-			<image class="main-bg" src="../../static/images/night-time.png"></image>
+			<!-- <image class="main-bg" v-else src="/static/images/night-time.png"></image> -->
+			<image class="main-bg" src="/static/images/night-time.png"></image>
 			<!-- <view class="main-bg"></view> -->
 			<view class="circles">
 				<view class="circle strategy extend-click" @tap="goStrategy">
@@ -50,7 +50,7 @@
 		<view v-else class="task-wrapper">
 			<view class="title">
 				<text class="text">任务</text>
-				<text class="close extend-click" @tap="closeTasks">X</text>
+				<image class="close extend-click" src="/static/images/close.png" @tap="closeTasks"></image>
 			</view>
 			<view class="task-list">
 				<task-item v-for="taskItem in taskList" :item="taskItem" :key="taskItem.id"></task-item>
@@ -263,8 +263,8 @@
 				background-color: #fff;
 				.close {
 					position: absolute;
-					width: 24rpx;
-					height: 24rpx;
+					width: 30rpx;
+					height: 30rpx;
 					right: 30rpx;
 					top: 33rpx;
 					color: #C0C0C0;

@@ -14,7 +14,7 @@
 		</view>
 		<view class="mask" v-if="grabTipsShow || orderDetailShow">
 			<view class="middle order-info" v-if="grabTipsShow">
-				<image class="suc-pic" src="../../static/images/success-orange.png"></image>
+				<image class="suc-pic" src="/static/images/success-orange.png"></image>
       	<view class="suc-txt">抢单成功</view>
 				<view class="next">
 					<view class="btn extend-click cancel" @tap="goDetail">查看订单</view>
@@ -23,14 +23,14 @@
 			</view>
 			<view class="middle grab-suc" v-if="orderDetailShow">
 				<view class="title">
-					<image class="funnel" src="../../static/images/funnel.png"></image>
+					<image class="funnel" src="/static/images/funnel.png"></image>
 					<view class="txt">
 						<text class="time">
 							{{ curOrderDetail.time | timeFilter }}
 						</text>
 						<text>倒计时</text>
 					</view>
-					<view class="close extend-click" @tap="closeDetail">X</view>
+					<image class="close extend-click" src="/static/images/close.png" @tap="closeDetail"></image>
 				</view>
 				<view class="detail">
 					<view class="item">
@@ -82,15 +82,15 @@
 			return {
 				orderArr: [
 					{ type: 0, text: '下单' },
-					{ type: 0, text: '接单' }
+					{ type: 0, text: '抢单' }
 				],
-				activeIndex: 0, // 0 下单 1 接单
+				activeIndex: 0, // 0 下单 1 抢单
 				ordering: 0, // 0 正在下单 1 生成订单 
 				GrabList: [
-					{ avator: '../static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 1, id: 0 },
-					{ avator: '../static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 1 },
-					{ avator: '../static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 2 },
-					{ avator: '../static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 3 }
+					{ avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 1, id: 0 },
+					{ avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 1 },
+					{ avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 2 },
+					{ avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 3 }
 				],
 				grabTipsShow: false, // 签单成功提示
 				orderDetailShow: false, // 订单详情
@@ -281,8 +281,8 @@
 							color: #227656;
 						}
 						.close {
-							font-size: 40rpx;
-							font-family: consolas, PingFangSC-Semibold;
+							width: 30rpx;
+							height: 30rpx;
 						}
 					}
 					.detail {

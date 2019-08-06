@@ -21,7 +21,7 @@
       </cover-view>
       <cover-view class="tips">
         <cover-image class="tips-img" src="../../../static/images/tips.png"></cover-image>
-        <cover-view class="tips-tx">您最多可以选择3个小区作为接单范围</cover-view>
+        <cover-view class="tips-tx">您最多可以选择3个小区作为抢单范围</cover-view>
       </cover-view>
     </cover-view>
   </view>

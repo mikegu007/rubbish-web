@@ -1,6 +1,7 @@
 <template>
 	<view class="map-wrapper">
-		<view class="header">
+		<button v-if="!hasUserInfo" type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">点击登录</button>
+		<view v-if="hasUserInfo" class="header">
 			<view class="personal">
 				<image class="avator" src="../../static/images/avator.png"></image>
 				<view class="info">
@@ -25,7 +26,7 @@
 				<view class="right extend-click"></view>
 			</view>
 		</view>
-		<view class="category">
+		<view v-if="hasUserInfo" class="category">
 			<view class="item" @tap="goMyAddress">
 				<image class="img" src="../../static/images/address.png"></image>
 				<text class="text">我的地址</text>
@@ -52,7 +53,7 @@
 				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
 			</view>
 		</view>
-		<view v-if="showService" class="mask">
+		<view v-if="showService && hasUserInfo" class="mask">
 			<view class="footer">
 				<view class="service">
 					<view class="title">我的客服</view>
@@ -68,36 +69,69 @@
 	export default {
 		data() {
 			return {
+				hasUserInfo: false, // 是否拥有用户信息
+				userInfo: {},
 				showService: false
 			};
 		},
+		onReady () {
+			let userInfo = uni.getStorageSync('userInfo')
+			if (userInfo) {
+				this.hasUserInfo = true
+			} else {
+				this.hasUserInfo = false
+			}
+		},
 		methods: {
+			// 获取用户信息
+			getUserInfo() {
+				let $self = this
+				uni.getUserInfo({
+					provider: 'weixin',
+					success: function (infoRes) {
+						console.log(infoRes)
+						uni.setStorageSync('userInfo', infoRes)
+						$self.hasUserInfo = true
+					},
+					fail: function(err) {
+						console.log(err)
+						$self.hasUserInfo = false
+					}
+				})
+			},
+			// 跳转红包
 			goRedPackage() {
 				uni.navigateTo({
 					url: '../mine/myRedPackage/myRedPackage'
 				})
 			},
+			// 我的地址
 			goMyAddress() {
 				uni.navigateTo({
 					url: '../mine/myAddress/myAddress'
 				})
 			},
+			// 我的订单
 			goMyOrder() {
 				uni.navigateTo({
 					url: '../mine/myOrder/myOrder'
 				})
 			},
+			// 我的能量
 			goMyEnergy() {
 				uni.navigateTo({
 					url: '../mine/myEnergy/myEnergy'
 				})
 			},
+			// 我的服务
 			goMyService() {
 				this.showService = true
 			},
+			// 关闭我的服务弹窗
 			canService () {				
 				this.showService = false
 			},
+			// 我的规则
 			goMyRule() {
 				uni.navigateTo({
 					url: '../mine/myRule/myRule'

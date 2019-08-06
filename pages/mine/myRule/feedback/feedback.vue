@@ -24,7 +24,7 @@
 				<input class="ipt" name="name" placeholder="手机号/邮箱" />
 			</view>
 			<view class="chkbox">
-				<checkbox class="chk" value="cb" />允许开发者在48小时内通过客服消息联系我
+				<v-checkbox class="chk" @check="checkStatus"></v-checkbox>允许开发者在48小时内通过客服消息联系我
 			</view>
 		</view>
 		<view class="submit">
@@ -34,11 +34,24 @@
 </template>
 
 <script>
+	import vCheckbox from '../../../../components/vCheckbox'
+	
+
 	export default {
+		components: { 
+			'v-checkbox': vCheckbox
+		 },
 		data() {
 			return {
-				
+				form: {
+					active: false
+				}
 			};
+		},
+		methods: {
+			checkStatus(active) {
+				this.form.active = active
+			}
 		}
 	}
 </script>
@@ -100,6 +113,9 @@
 				line-height: 36rpx;
 				font-size: 32rpx;
 				color:rgba(128,128,128,1)
+			}
+			.tip {
+				margin-bottom: 10rpx;
 			}
 			.chkbox {
 				height: 36rpx;

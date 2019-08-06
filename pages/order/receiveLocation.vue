@@ -1,4 +1,4 @@
-// 接单定位
+// 抢单定位
 <template name="receive-location">
 	<view class="location" @tap="goAddSetting">
 		<view class="info">
@@ -7,7 +7,7 @@
 				<text class="text">逸仙路2816号 华滋奔腾大厦B座</text>
 		  </view>
 			<view class="item">
-				<text class="label">接单小区：</text>
+				<text class="label">抢单小区：</text>
 				<text class="text">3个</text>
 			</view>
 		</view>

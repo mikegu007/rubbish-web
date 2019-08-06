@@ -24,7 +24,7 @@
 				<view class="left">红包</view>
 				<view class="pay-type" v-if="form.redUsable > 0">
 					<view class="red-package" @tap="goMyRedPackage">
-						<view class="red-usable">{{ form.redUsable }}个可用</view>
+						<text class="red-usable">{{ form.redUsable }}个可用</text>
 						<image class="indictor" src="../../static/images/arrow-right.png"></image>
 					</view>
 				</view>
@@ -45,7 +45,7 @@
 			</view>
 		</view>
 		<view class="tips">
-			<checkbox class="chk" value="cb" />允许工作人员在30分钟内通过手机号联系我
+			<v-checkbox class="chk" @check="checkStatus"></v-checkbox>允许工作人员在30分钟内通过手机号联系我
 		</view>
 		<view class="submit" @tap="submit">提交</view>
 	</view>
@@ -53,20 +53,23 @@
 
 <script>
 	import Number from '../../components/number.vue'
+	import vCheckbox from '../../components/vCheckbox.vue'
 	
 	export default {
 		name: 'place-order',
 		components: {
-			number: Number
+			number: Number,
+			'v-checkbox': vCheckbox
 		},
 		data() {
 			return {
 				form: {
-					smallNum: 0,
-					bigNum: 2,
-					redUsable: 3,
-					discount: 12,
-					total: 30
+					smallNum: 0, // 小袋数量
+					bigNum: 2, // 大袋数量
+					redUsable: 3, // 红包可用数
+					discount: 12, // 优惠
+					total: 30, // 合计
+					allowed: false // 复选框
 				}
 			}
 		},
@@ -78,6 +81,9 @@
 			},
 			changeBig(index) {
 				this.form.bigNum += index
+			},
+			checkStatus(active) {
+				this.form.allowed = active
 			},
 			goMyRedPackage() {
 				uni.navigateTo({
@@ -140,12 +146,11 @@
 						align-items: center;
 						width: 115rpx;
 						.red-usable {
-							// flex: 1;
-							width: 90rpx;
+							width: 92rpx;
 							height: 30rpx;
 							margin-right: 8rpx;
 							line-height: 30rpx;
-							font-size: 28rpx;
+							font-size: 24rpx;
 							text-align: center;
 							border-radius: 4rpx;
 							background-color: #F96806;

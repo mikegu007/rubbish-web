@@ -1,11 +1,14 @@
 <template name="address-item">
 	<view class="address">
 		<view class="detail">
-			<view class="buildings">华滋奔腾大厦</view>
-			<view class="road">逸仙路2816号 B栋12楼</view>
-			<view class="personal">
-				<text>Sofie Hubert</text>
-				<text>18233409878</text>
+			<image v-if="item.isCur" class="address-img" src="/static/images/cur-address.png"></image>
+			<view class="info">
+				<view class="buildings">华滋奔腾大厦</view>
+				<view class="road">逸仙路2816号 B栋12楼</view>
+				<view class="personal">
+					<text>Sofie Hubert</text>
+					<text>18233409878</text>
+				</view>
 			</view>
 		</view>
 		<view class="edit" @tap="edit">编辑</view>
@@ -55,21 +58,30 @@
 		}
 		.detail {
 			flex: 1;
-			.buildings {
-				color: rgba(74,74,74,1);
-				font-size: 32rpx;
-				line-height: 42rpx;
+			display: flex;
+			.address-img {
+				width: 28rpx;
+				height: 34rpx;
+				margin: 5rpx 24rpx 0 0;
 			}
-			.road {
-				font-weight:400;
-				color: rgba(102,102,102,1);
-				font-size: 28rpx;
-				line-height: 36rpx; 
-			}
-			.personal {
-				color: rgba(162,162,162,1);
-				line-height: 30rpx;
-				font-size: 24rpx;
+			.info {
+				flex: 1;
+				.buildings {
+					color: rgba(74,74,74,1);
+					font-size: 32rpx;
+					line-height: 42rpx;
+				}
+				.road {
+					font-weight:400;
+					color: rgba(102,102,102,1);
+					font-size: 28rpx;
+					line-height: 36rpx; 
+				}
+				.personal {
+					color: rgba(162,162,162,1);
+					line-height: 30rpx;
+					font-size: 24rpx;
+				}
 			}
 		}
 	}

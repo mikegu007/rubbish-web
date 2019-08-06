@@ -97,6 +97,9 @@
       font-size: 32rpx;
       color: gray;
 }
+.feedback .supply .tip.data-v-a4a184a2 {
+      margin-bottom: 10rpx;
+}
 .feedback .supply .chkbox.data-v-a4a184a2 {
       height: 36rpx;
       display: -webkit-box;
