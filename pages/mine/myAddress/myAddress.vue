@@ -1,11 +1,19 @@
 <template>
 	<view class="myaddress">
-		<address-item :item="addressList.default" @eidt="goEdit"></address-item>
-		<!-- <hello></hello> -->
-		<view class="others">
-			<text class="title">其他地址</text>
-			<address-item class="other" v-for="item in addressList.others" :key="item.id" @eidt="goEdit"></address-item>
+		<!-- 默认地址 -->
+		<view class="default" v-if="defaultAddress">
+			<view class="title">默认地址</view>
+			<address-item :item="defaultAddress" @eidt="goEdit(defaultAddress)"></address-item>
 		</view>
+		<!-- 其他地址列表 -->
+		<view v-if="otherAddressList.length" class="others">
+			<view class="title">其他地址</view>
+			<view class="list">
+				<address-item class="other" v-for="item in otherAddressList" :item="item" :key="item.id" @eidt="goEdit(item)"></address-item>
+			</view>
+		</view>
+		<tips v-if="!addressList.length" :tips="tips"></tips>
+		<!-- 新增地址 -->
 		<view class="new" @tap="goNew">
 			<image class="new-img" src="/static/images/add.png"></image>
 			<text>新增收货地址</text>
@@ -15,31 +23,57 @@
 
 <script>
 	import addressItem from '../../../components/address.vue'
-	
+	import tips from '../../../components/tips.vue'
+
+	let $self
 	export default {
 		components: {
-			'address-item': addressItem
+			'address-item': addressItem,
+			'tips': tips
 		},
 		data() {
 			return {
-				addressList: {
-					default: { isCur: true }, // isCur是否是当前选中地址
-					others: [
-						{ id: 0 }, 
-						{ id: 1 }, 
-						{ id: 2}
-					]
-				}
+				uuid: '',
+				tips: '没找到地址，请新增地址!',
+				addressList: [] // 返回的地址列表
 			};
 		},
-		onReady() {
+		computed: {
+			defaultAddress() {
+				return this.addressList.find(item => item.defaultAddress)
+			},
+			otherAddressList() {
+				return this.addressList.filter(item => !item.defaultAddress)
+			}
+		},
+		onShow() {
+			$self = this
+			this.uuid = uni.getStorageSync('uuid')
+			this.queryAddList()
 		},
 		methods: {
-			goEdit() {
-				uni.navigateTo({
-					url: './edit'
+			// 请求地址列表
+			queryAddList() {
+				uni.request({
+					url: 'http://49.234.39.19:9022/user/address/list',
+					data: {
+						uuid: $self.uuid
+					}
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1) {
+						this.addressList = res.data.data
+					}
 				})
 			},
+			// 编辑地址
+			goEdit(address) {
+				let addStr = encodeURIComponent(JSON.stringify(address))
+				uni.navigateTo({
+					url: `./edit?address=${addStr}`
+				})
+			},
+			// 新增地址
 			goNew() {
 				uni.navigateTo({
 					url: './edit'
@@ -51,13 +85,29 @@
 
 <style lang="scss" scoped>
 	.myaddress {
+		.default {
+			padding: 10rpx 30rpx 0;
+			.title {
+				margin-left: 30rpx;
+				margin-bottom: 10rpx;
+			}
+		}
 		.others {
-			margin-top: 10rpx;
-			.other {
-				margin-bottom: 30rpx;
+			padding-top: 10rpx;
+			padding-bottom: 60rpx;
+			.list {
+				padding: 0 30rpx;
+				.other {
+					width: 100%;
+					margin-bottom: 30rpx;
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
 			}
 			.title {
 				margin-left: 30rpx;
+				margin-bottom: 10rpx;
 			}
 		}
 		.new {

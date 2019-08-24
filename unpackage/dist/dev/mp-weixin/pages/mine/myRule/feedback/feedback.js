@@ -98,10 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var vCheckbox = function vCheckbox() {return __webpack_require__.e(/*! import() | components/vCheckbox */ "components/vCheckbox").then(__webpack_require__.bind(null, /*! ../../../../components/vCheckbox */ "../../../../../volcano/develop/my-uniapp/components/vCheckbox.vue"));};var _default =
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var vCheckbox = function vCheckbox() {return __webpack_require__.e(/*! import() | components/vCheckbox */ "components/vCheckbox").then(__webpack_require__.bind(null, /*! ../../../../components/vCheckbox */ "../../../../../volcano/develop/my-uniapp/components/vCheckbox.vue"));};var _default =
 
 
 
@@ -144,14 +141,53 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   data: function data() {
     return {
       form: {
-        active: false } };
+        active: false,
+        appInfo: '',
+        content: '',
+        mobile: '' } };
 
 
+  },
+  onReady: function onReady() {
+    this.appInfo = uni.getStorageSync('appInfo');
   },
   methods: {
     checkStatus: function checkStatus(active) {
       this.form.active = active;
+    },
+    submit: function submit() {
+      if (!this.content.trim()) {
+        uni.showToast({
+          title: '请输入反馈内容',
+          icon: 'none' });
+
+        return;
+      } else if (!this.mobile.trim()) {
+        uni.showToast({
+          title: '请输入手机号码',
+          icon: 'none' });
+
+        return;
+      }
+      var param = {
+        openId: this.appInfo.openid,
+        content: "".concat(this.content, ";").concat(this.mobile) };
+
+      uni.request({
+        url: 'http://49.234.39.19:9022/feed/back/add',
+        data: param,
+        method: 'POST' }).
+      then(function (infoRes) {var _infoRes = _slicedToArray(
+        infoRes, 2),err = _infoRes[0],res = _infoRes[1];
+        if (res.data && res.data.status === 1) {
+          uni.showToast({
+            title: '提交成功' });
+
+          uni.navigateBack({});
+        }
+      });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

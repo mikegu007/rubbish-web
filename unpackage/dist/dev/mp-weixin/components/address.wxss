@@ -33,12 +33,12 @@
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 30rpx;
   padding: 30rpx;
   background-color: #fff;
   -webkit-box-shadow: 0px 2rpx 6rpx 2rpx rgba(0, 0, 0, 0.06);
           box-shadow: 0px 2rpx 6rpx 2rpx rgba(0, 0, 0, 0.06);
   border-radius: 8rpx;
+  margin-bottom: 30rpx;
 }
 .address .edit.data-v-8dc7c796 {
     height: 36rpx;
@@ -61,7 +61,7 @@
 .address .detail .address-img.data-v-8dc7c796 {
       width: 28rpx;
       height: 34rpx;
-      margin: 5rpx 24rpx 0 0;
+      margin: 6rpx 24rpx 0 0;
 }
 .address .detail .info.data-v-8dc7c796 {
       -webkit-box-flex: 1;

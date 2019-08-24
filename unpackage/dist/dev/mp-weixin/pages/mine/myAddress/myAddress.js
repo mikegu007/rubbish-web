@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var addressItem = function addressItem() {return __webpack_require__.e(/*! import() | components/address */ "components/address").then(__webpack_require__.bind(null, /*! ../../../components/address.vue */ "../../../../../volcano/develop/my-uniapp/components/address.vue"));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var addressItem = function addressItem() {return __webpack_require__.e(/*! import() | components/address */ "components/address").then(__webpack_require__.bind(null, /*! ../../../components/address.vue */ "../../../../../volcano/develop/my-uniapp/components/address.vue"));};var tips = function tips() {return __webpack_require__.e(/*! import() | components/tips */ "components/tips").then(__webpack_require__.bind(null, /*! ../../../components/tips.vue */ "../../../../../volcano/develop/my-uniapp/components/tips.vue"));};
 
 
 
@@ -116,30 +116,64 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+var $self;var _default =
 {
   components: {
-    'address-item': addressItem },
+    'address-item': addressItem,
+    'tips': tips },
 
   data: function data() {
     return {
-      addressList: {
-        default: { isCur: true }, // isCur是否是当前选中地址
-        others: [
-        { id: 0 },
-        { id: 1 },
-        { id: 2 }] } };
-
-
-
+      uuid: '',
+      tips: '没找到地址，请新增地址!',
+      addressList: [] // 返回的地址列表
+    };
   },
-  onReady: function onReady() {
+  computed: {
+    defaultAddress: function defaultAddress() {
+      return this.addressList.find(function (item) {return item.defaultAddress;});
+    },
+    otherAddressList: function otherAddressList() {
+      return this.addressList.filter(function (item) {return !item.defaultAddress;});
+    } },
+
+  onShow: function onShow() {
+    $self = this;
+    this.uuid = uni.getStorageSync('uuid');
+    this.queryAddList();
   },
   methods: {
-    goEdit: function goEdit() {
+    // 请求地址列表
+    queryAddList: function queryAddList() {var _this = this;
+      uni.request({
+        url: 'http://49.234.39.19:9022/user/address/list',
+        data: {
+          uuid: $self.uuid } }).
+
+      then(function (infoRes) {var _infoRes = _slicedToArray(
+        infoRes, 2),err = _infoRes[0],res = _infoRes[1];
+        if (res.data && res.data.status === 1) {
+          _this.addressList = res.data.data;
+        }
+      });
+    },
+    // 编辑地址
+    goEdit: function goEdit(address) {
+      var addStr = encodeURIComponent(JSON.stringify(address));
       uni.navigateTo({
-        url: './edit' });
+        url: "./edit?address=".concat(addStr) });
 
     },
+    // 新增地址
     goNew: function goNew() {
       uni.navigateTo({
         url: './edit' });

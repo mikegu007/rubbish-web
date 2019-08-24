@@ -1,15 +1,35 @@
 <template>
   <view class="remark-wrapper">
     <view class="remark">
-      <textarea class="textarea" placeholder="填写额外对工作人员备注的信息"/>
+      <textarea v-model="remark" class="textarea" placeholder="填写额外对工作人员备注的信息"/>
     </view>
-    <view class="submit">确定</view>
+    <view class="submit" @tap="submit">确定</view>
   </view>
 </template>
 
 <script>
+  import { REFRESH_REMARK } from '../../../utils/constant.js'
+
   export default {
-    
+    data() {
+      return {
+        remark: ''
+      }
+    },
+    onLoad(options) {
+      if (options.remark) {
+        this.remark = options.remark
+      }
+    },
+    methods: {
+      submit() {
+        let pages = getCurrentPages()
+        let prevPage = pages[pages.length - 2]
+        prevPage.data.placeOrderInfo.remark = this.remark
+        this.$eventBus.$emit(REFRESH_REMARK, this.remark)
+        uni.navigateBack({})
+      }
+    }
   }
 </script>
 

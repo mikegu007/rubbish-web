@@ -34,11 +34,11 @@
 				covers: [{
 					latitude: 39.909,
 					longitude: 116.39742,
-					iconPath: '../../../static/images/map-pin.png'
+					iconPath: '/static/images/map-pin.png'
 				}, {
 					latitude: 39.90,
 					longitude: 116.39,
-					iconPath: '../../../static/images/map-pin.png'
+					iconPath: '/static/images/map-pin.png'
         }],
         type: 'coming' // coming 抢单中 success 完成
 			}

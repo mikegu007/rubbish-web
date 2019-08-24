@@ -98,70 +98,179 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var vCheckbox = function vCheckbox() {return __webpack_require__.e(/*! import() | components/vCheckbox */ "components/vCheckbox").then(__webpack_require__.bind(null, /*! ../../../components/vCheckbox.vue */ "../../../../../volcano/develop/my-uniapp/components/vCheckbox.vue"));};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var $self;var _default =
+{
+  components: {
+    'v-checkbox': vCheckbox },
+
+  data: function data() {
+    return {
+      genderArr: [{ label: '男', gender: 1 }, { label: '女', gender: 0 }],
+      signArr: [{ label: '家', field: 0 }, { label: '公司', field: 1 }, { label: '学校', field: 2 }],
+      form: {
+        name: '',
+        gender: 1,
+        mobile: '',
+        address: '省份 城市 县区',
+        addressDetail: '',
+        latitude: '',
+        longitude: '',
+        sign: 0,
+        defaultAddress: false },
+
+      uuid: '' };
 
   },
+  onLoad: function onLoad(options) {
+    $self = this;
+    this.uuid = uni.getStorageSync('uuid');
+    if (JSON.stringify(options) !== '{}') {
+      var address = JSON.parse(decodeURIComponent(options.address));
+      this.form = Object.assign({}, address);
+    }
+  },
+  onShow: function onShow() {
+    var curAddress = uni.getStorageSync('curAddress');
+    // console.log(curAddress)
+    if (curAddress) {
+      var tudeArr = curAddress.location.split(',');
+      var latitude = tudeArr[0];
+      var longitude = tudeArr[1];
+      this.form = Object.assign(this.form, {
+        latitude: latitude,
+        longitude: longitude,
+        address: curAddress.district,
+        addressDetail: curAddress.name });
+
+      uni.removeStorageSync('curAddress');
+    }
+  },
   methods: {
+    checkGender: function checkGender(item) {
+      this.form.gender = item.gender;
+    },
+    checkSign: function checkSign(sign) {
+      this.form.sign = sign.field;
+    },
+    checkAddress: function checkAddress() {
+      uni.navigateTo({
+        url: "../search/search?address=".concat(this.form.addressDetail) });
+
+    },
+    setDefault: function setDefault(defaultAdd) {
+      this.form.defaultAddress = defaultAdd;
+    },
+    submit: function submit() {
+      var param = {
+        address: this.form.address || '',
+        addressDetail: this.form.addressDetail || '',
+        defaultAddress: this.form.defaultAddress || '',
+        latitude: this.form.latitude || '',
+        longitude: this.form.longitude || '',
+        mobile: this.form.mobile || '',
+        name: this.form.name || '',
+        sign: this.form.sign || '',
+        userUuid: this.uuid };
+
+      if (this.form.id) {
+        param = Object.assign(param, { id: this.form.id });
+      }
+
+      uni.request({
+        url: 'http://49.234.39.19:9022/user/address/edit',
+        method: 'POST',
+        data: param }).
+      then(function (infoRes) {var _infoRes = _slicedToArray(
+        infoRes, 2),err = _infoRes[0],res = _infoRes[1];
+        if (res.data && res.data.status === 1) {
+          var title = param.id ? '地址编辑成功' : '地址新增成功';
+          uni.showToast({
+            title: title,
+            icon: 'success',
+            duration: 1000 });
+
+          uni.navigateBack({});
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: res.data.errMsg,
+            duration: 1000 });
+
+        }
+      });
+    },
     delAddress: function delAddress() {
       uni.showModal({
         title: '删除地址',
         content: '确认要删除改地址吗？',
-        // showCancel: true,
         cancelColor: '#808080',
         confirmColor: '#1DA06E',
         success: function success(res) {
-          // console.log(res)
           if (res.confirm) {
-            uni.navigateBack({});
+            uni.request({
+              url: 'http://49.234.39.19:9022/user/address/del',
+              // method: 'POST',
+              data: { id: $self.form.id || 0 } }).
+            then(function (infoRes) {var _infoRes2 = _slicedToArray(
+              infoRes, 2),err = _infoRes2[0],res = _infoRes2[1];
+              if (res.data && res.data.status === 1) {
+                uni.showToast({
+                  title: '删除成功',
+                  icon: 'success',
+                  duration: 1000 });
+
+                uni.navigateBack({});
+              }
+            });
           }
         } });
 

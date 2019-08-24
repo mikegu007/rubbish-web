@@ -1,35 +1,84 @@
 <script>
+	import amapFile from './lib/amap-wx'
+	let $self
 	export default {
-		onLaunch: function() {
+		onLaunch() {
+			$self = this
 			let appInfo = uni.getStorageSync('appInfo')
-			if (!appInfo) {
-				uni.login({
-					provider: 'weixin',
-					success: function (loginRes) {
-						console.log(loginRes);
-						if (loginRes.code) {
-							let appId = 'wx0c05632ffc644b36'
-							let appSecret = '8018b076c849cc483d07f6fe81a485f3'
-							uni.request({
-								url: `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${appSecret}&js_code=${loginRes.code}&grant_type=authorization_code`,
-								data: {
-									userInfoDto: '021akbX714euWL1vnpW71vFrX71akbXr'
+			if (appInfo) return;
+			uni.login({
+				provider: 'weixin',
+				success: function (loginRes) {
+					if (loginRes.code) {
+						let appId = 'wx0c05632ffc644b36'
+						let appSecret = '8018b076c849cc483d07f6fe81a485f3'
+						uni.request({
+							url: `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${appSecret}&js_code=${loginRes.code}&grant_type=authorization_code`,
+							data: {
+								userInfoDto: '021akbX714euWL1vnpW71vFrX71akbXr'
+							}
+						})
+							.then(data => {
+								let [err, res] = data
+								if (res.data && res.data.openid && res.data.session_key) {
+									uni.setStorageSync('appInfo', res.data)
+									$self.checkUserInfo(res.data.openid)
 								}
 							})
-								.then(data => {
-									let [err, res] = data
-									if (res.data && res.data.openid && res.data.session_key) {
-										uni.setStorageSync('appInfo', JSON.stringify(res.data))
-									}
-								})
-						}
+					}
+				}
+			})
+		},
+		onShow() {
+		},
+		onHide() {
+		},
+		methods: {
+			// 检查用户
+			checkUserInfo(openid) {
+				this.queryUserInfo(openid).then(infoRes => {
+					let [err, res] = infoRes
+					// 未找到当前用户，新增用户
+					if (res.data && res.data.status === 0) {
+						$self.addUserInfo(openid)
+					} else {
+						uni.setStorageSync('uuid', res.data.data.uuid)
+					}
+				}).catch(err => console.log(err))
+			},
+			// 新增用户信息
+			addUserInfo(openid) {
+				let params = {
+					openId: openid
+					// userImage: $self.userInfo.avatarUrl || '',
+					// userMobile: '',
+					// userName: $self.userInfo.nickName,
+					// userSex: $self.userInfo.gender
+				}
+				uni.request({
+					url: "http://49.234.39.19:9022/user/info/mainTain",
+					method: 'POST',
+					data: params
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1 && !res.data.errCode) {
+						uni.setStorageSync('uuid', res.data.data)
 					}
 				})
-			}
-		},
-		onShow: function() {
-		},
-		onHide: function() {
+			},
+			// 查询用户信息
+			queryUserInfo(openId) {
+				return new Promise((resolve, reject) => {
+					uni.request({
+					url: 'http://49.234.39.19:9022/user/info/openId',
+					data: {
+						openId: openId
+					}
+					}).then(infoRes => {
+						resolve(infoRes)
+					}).catch(err => reject(err))
+				})
+			},
 		}
 	}
 </script>

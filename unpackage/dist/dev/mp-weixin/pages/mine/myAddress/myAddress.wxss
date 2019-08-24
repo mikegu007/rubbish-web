@@ -24,14 +24,30 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.myaddress .others.data-v-094cacea {
-  margin-top: 10rpx;
+.myaddress .default.data-v-094cacea {
+  padding: 10rpx 30rpx 0;
 }
-.myaddress .others .other.data-v-094cacea {
-    margin-bottom: 30rpx;
+.myaddress .default .title.data-v-094cacea {
+    margin-left: 30rpx;
+    margin-bottom: 10rpx;
+}
+.myaddress .others.data-v-094cacea {
+  padding-top: 10rpx;
+  padding-bottom: 60rpx;
+}
+.myaddress .others .list.data-v-094cacea {
+    padding: 0 30rpx;
+}
+.myaddress .others .list .other.data-v-094cacea {
+      width: 100%;
+      margin-bottom: 30rpx;
+}
+.myaddress .others .list .other.data-v-094cacea:last-child {
+        margin-bottom: 0;
 }
 .myaddress .others .title.data-v-094cacea {
     margin-left: 30rpx;
+    margin-bottom: 10rpx;
 }
 .myaddress .new.data-v-094cacea {
   position: fixed;

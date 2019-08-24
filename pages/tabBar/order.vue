@@ -4,12 +4,12 @@
 			<view class="item" :class="{'active': activeIndex === $index}" v-for="(order, $index) in orderArr" :key="order.type" @tap="checkIndex($index)">
 				<text class="text">{{ order.text }}</text>
 			</view>
-			<order-location v-if="activeIndex === 0 && ordering === 0"></order-location>
+			<place-location v-if="activeIndex === 0 && ordering === 0" :info="placeOrderInfo"></place-location>
 			<gen-order v-else-if="activeIndex === 0 && ordering === 1" @cancel="cancelOrder" @continue="continueOrder"></gen-order>
 			<receive-location v-else @goAddSetting="goAddSetting"></receive-location>
 		</view>
 		<view class="content">
-			<place-order v-if="activeIndex === 0 && ordering === 0" @submit="submitOrder"></place-order>
+			<place-order v-if="activeIndex === 0 && ordering === 0" :item="placeOrderInfo" @submit="submitOrder"></place-order>
 			<grab-list v-if="activeIndex === 1" :list="GrabList" @grab="grab" @check-detail="checkDetail"></grab-list>
 		</view>
 		<view class="mask" v-if="grabTipsShow || orderDetailShow">
@@ -64,15 +64,16 @@
 </template>
 
 <script>
-	import OrderLocation from '../order/orderLocation.vue'
-	import ReceiveLocation from '../order/receiveLocation.vue'
-	import PlaceOrder from '../order/placeOrder.vue'
-	import GenOrder from '../order/genOrder.vue'
+	import PlaceLocation from '../order/placeLocation/placeLocation.vue'
+	import ReceiveLocation from '../order/receiveLocation/receiveLocation.vue'
+	import PlaceOrder from '../order/placeOrder/placeOrder.vue'
+	import GenOrder from '../order/genOrder/genOrder.vue'
 	import GrabList from '../../components/grabList.vue'
 	
+	let $self;
 	export default {
 		components: {
-			'order-location': OrderLocation,
+			'place-location': PlaceLocation,
 			'receive-location': ReceiveLocation,
 			'place-order': PlaceOrder,
 			'gen-order': GenOrder,
@@ -80,12 +81,31 @@
 		},
 		data() {
 			return {
+				// 顶部tab
 				orderArr: [
 					{ type: 0, text: '下单' },
 					{ type: 0, text: '抢单' }
 				],
+				uuid: '',
 				activeIndex: 0, // 0 下单 1 抢单
-				ordering: 0, // 0 正在下单 1 生成订单 
+				ordering: 0, // 0 正在下单 1 生成订单
+				// 下单信息
+				placeOrderInfo: {
+					name: '', // 姓名
+					mobile: '', // 电话
+					address: '', // 地址
+					addressDetail: '', // 详细地址
+					longitude: '', // 经纬度
+					latitude: '',
+					smallNum: 0, // 小袋数量
+					middleNum: 0, // 中袋数量
+					bigNum: 0, // 大袋数量
+					redUsable: 3, // 红包可用数
+					discount: 0, // 优惠
+					total: 0, // 合计
+					remark: '', // 备注
+					allowed: false, // 复选框
+				},
 				GrabList: [
 					{ avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 1, id: 0 },
 					{ avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 0, id: 1 },
@@ -95,17 +115,111 @@
 				grabTipsShow: false, // 签单成功提示
 				orderDetailShow: false, // 订单详情
 				curOrderDetail: { // 当前商品明细
-
 				}
 			};
 		},
+		onLoad() {
+			$self = this
+			let uuid = uni.getStorageSync('uuid')
+			this.uuid = uuid ? uuid : ''
+			this.queryAddList()
+			this.queryPacket()
+		},
 		methods: {
+			// 请求地址列表
+			queryAddList() {
+				uni.request({
+					url: 'http://49.234.39.19:9022/user/address/list',
+					data: {
+						uuid: $self.uuid
+					}
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1) {
+						if (!res.data.data.length) { // 地址列表为空
+							this.placeOrderInfo.address = '请添加地址'
+							let userInfo = uni.getStorageSync('userInfo')
+							if (userInfo) {
+								this.placeOrderInfo = Object.assign(this.placeOrderInfo, {
+									name: userInfo.userInfo.nickName
+								})
+							}
+						} else { // 不为空
+							let defaultAddress = res.data.data.find(item => item.defaultAddress)
+							if (!defaultAddress) { // 没有默认地址
+								defaultAddress = res.data.data[0]
+							}
+							$self.placeOrderInfo = Object.assign($self.placeOrderInfo, {
+								name: defaultAddress.name,
+								mobile: defaultAddress.mobile,
+								addressId: defaultAddress.id,
+								address: defaultAddress.address,
+								addressDetail: defaultAddress.addressDetail,
+								longitude: defaultAddress.longitude,
+								latitude: defaultAddress.latitude
+							})
+						}
+					}
+				})
+			},
+			// 查询红包数量
+			queryPacket() {
+				let uuid = uni.getStorageSync('uuid')
+				if (!uuid) return
+				uni.request({
+					url: 'http://49.234.39.19:9022/red/packet/uuid',
+					data: {
+						uuid: uuid
+					}
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1) {
+						$self.placeOrderInfo.redUsable = res.data.data
+					}
+				}).catch(err => console.log(err))
+			},
 			// 切换 下单订单
 			checkIndex(index) {
 				this.activeIndex = index
 			},
 			// 下单提交按钮
-			submitOrder() {
+			submitOrder(form) {
+				let fields = {
+					smallNum: { name: '小', type: 2 },
+					middleNum: { name: '中', type: 1 }, 
+					bigNum: { name: '大', type: 0 }
+				}
+				
+				let orderDetailDtos = []
+				for (let field of Object.keys(fields)) {
+					let obj = {}
+					obj.classifyCount = this.placeOrderInfo[field]
+					obj.classifyName = fields[field].name
+					obj.classifyType = fields[field].type
+					orderDetailDtos.push(obj)
+				}
+				let param = {
+					addressId: this.placeOrderInfo.addressId,
+					addressName: `${this.placeOrderInfo.address} ${this.placeOrderInfo.addressDetail}`,
+					latitude: this.placeOrderInfo.latitude,
+					longitude: this.placeOrderInfo.longitude,
+					mobile: this.placeOrderInfo.mobile,
+					orderDetailDtos: orderDetailDtos,
+					redId: 0,
+					remark: this.placeOrderInfo.remark,
+					userName: this.placeOrderInfo.name,
+					userUuid: this.uuid
+				}
+				uni.request({
+					url: 'http://49.234.39.19:9022/order/addOrder',
+					method: 'POST',
+					data: param
+				})
+					.then(data => {
+						let [err, res] = data
+						console.log(data)
+					})
+
 				this.ordering = 1
 			},
 			// 取消订单

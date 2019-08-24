@@ -11,28 +11,34 @@
 			<view class="item">
 				<view class="left">小型袋子</view>
 				<view class="pay-type">
-					<number v-model="form.smallNum" @change="changeSmall"></number>
+					<number v-model="item.smallNum" @change="changeSmall"></number>
+				</view>
+			</view>
+			<view class="item">
+				<view class="left">中型袋子</view>
+				<view class="pay-type">
+					<number v-model="item.middleNum" @change="changeSmall"></number>
 				</view>
 			</view>
 			<view class="item">
 				<view class="left">大型袋子</view>
 				<view class="pay-type">
-					<number v-model="form.bigNum" @change="changeBig"></number>
+					<number v-model="item.bigNum" @change="changeBig"></number>
 				</view>
 			</view>
 			<view class="item">
 				<view class="left">红包</view>
-				<view class="pay-type" v-if="form.redUsable > 0">
+				<view class="pay-type" v-if="item.redUsable > 0">
 					<view class="red-package" @tap="goMyRedPackage">
-						<text class="red-usable">{{ form.redUsable }}个可用</text>
-						<image class="indictor" src="../../static/images/arrow-right.png"></image>
+						<text class="red-usable">{{ item.redUsable }}个可用</text>
+						<image class="indictor" src="/static/images/arrow-right.png"></image>
 					</view>
 				</view>
 			</view>
 			<view class="item discount">
-				<view class="left discount-label">已优惠<text class="discount-num">¥{{ form.discount }}</text></view>
+				<view class="left discount-label">已优惠<text class="discount-num">¥{{ item.discount }}</text></view>
 				<view class="pay-type">
-					<view class="total-txt">小计<text class="total-num">¥{{ form.total }}</text></view>
+					<view class="total-txt">小计<text class="total-num">¥{{ item.total }}</text></view>
 				</view>
 			</view>
 		</view>
@@ -40,50 +46,58 @@
 			<view class="item" @tap="goRemark">
 				<view class="left">订单备注</view>
 				<view class="pay-type">
-					<image class="indictor" src="../../static/images/arrow-right.png"></image>
+					<image class="indictor" src="/static/images/arrow-right.png"></image>
 				</view>
 			</view>
 		</view>
-		<view class="tips">
+		<!-- <view class="tips">
 			<v-checkbox class="chk" @check="checkStatus"></v-checkbox>允许工作人员在30分钟内通过手机号联系我
-		</view>
+		</view> -->
 		<view class="submit" @tap="submit">提交</view>
 	</view>
 </template>
 
 <script>
-	import Number from '../../components/number.vue'
-	import vCheckbox from '../../components/vCheckbox.vue'
+	import Number from '../../../components/number.vue'
+	import vCheckbox from '../../../components/vCheckbox.vue'
+	import { REFRESH_REMARK } from '../../../utils/constant.js'
 	
+	// let $self
 	export default {
 		name: 'place-order',
+		props: {
+			item: {
+				type: Object
+			}
+		},
 		components: {
 			number: Number,
 			'v-checkbox': vCheckbox
 		},
-		data() {
-			return {
-				form: {
-					smallNum: 0, // 小袋数量
-					bigNum: 2, // 大袋数量
-					redUsable: 3, // 红包可用数
-					discount: 12, // 优惠
-					total: 30, // 合计
-					allowed: false // 复选框
-				}
-			}
-		},
-		computed: {
+		onReady() {
+			this.$eventBus.$on(REFRESH_REMARK, this.refreshRemark)
 		},
 		methods: {
+			refreshRemark(remark) {
+				this.item.remark = remark
+			},
 			changeSmall(index) {
-				this.form.smallNum += index
+				this.item.smallNum += index
+				this.calcTotal()
+			},
+			changeMiddle(index) {
+				this.item.middleNum += index
+				this.calcTotal()
 			},
 			changeBig(index) {
-				this.form.bigNum += index
+				this.item.bigNum += index
+				this.calcTotal()
 			},
 			checkStatus(active) {
-				this.form.allowed = active
+				this.item.allowed = active
+			},
+			calcTotal() {
+				this.item.total = this.item.smallNum * 3 + this.item.middleNum * 5 + this.item.bigNum * 7
 			},
 			goMyRedPackage() {
 				uni.navigateTo({
@@ -91,12 +105,13 @@
 				})
 			},
 			goRemark() {
+				console.log(this.item)
 				uni.navigateTo({
-					url: '../order/remark/remark'
+					url: `../order/remark/remark?remark=${this.item.remark}`
 				})
 			},
 			submit() {
-				this.$emit('submit')
+				this.$emit('submit', this.form)
 			}
 		}
 	}

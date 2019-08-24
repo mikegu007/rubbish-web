@@ -1,23 +1,35 @@
 // 下单定位
-<template name="order-location">
+<template name="place-location">
 	<view class="location">
 		<view class="info">
 			<view class="address">
-				<text class="road">逸仙路2816号</text>
-				<text class="build">华滋奔腾大厦B座</text>
+				<text class="road">{{ info.address || '' }}</text>
+				<text class="build">{{ info.addressDetail || '' }}</text>
 		  </view>
 			<view class="personal">
-				<text class="name">Mattie Blooman</text>
-				<text class="moblie">18676567654</text>
+				<text class="name">{{ info.name || '' }}</text>
+				<text class="moblie">{{ info.mobile || '' }}</text>
 			</view>
 		</view>
-		<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+		<image class="indictor extend-click" src="/static/images/arrow-right.png" @tap="goSearch"></image>
 	</view>
 </template>
 
 <script>
 	export default {
-		name: 'order-location'
+		name: 'place-location',
+		props: {
+			info: {
+				type: Object
+			}
+		},
+		methods: {
+			goSearch() {
+				uni.navigateTo({
+					url: '../../mine/search/search'
+				})
+			}	
+		}
 	}
 </script>
 
@@ -47,6 +59,9 @@
 				font-size: 28rpx;
 				color: #808080;
 				line-height: 36rpx;
+				.name {
+					margin-right: 20rpx;
+				}
 			}
 		}
 	}

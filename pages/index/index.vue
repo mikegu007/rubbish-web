@@ -1,21 +1,21 @@
 <template>
 	<view class="index">
 		<view class="header">
-			<!-- <image class="main-bg" v-if="curHours >= 6 && curHours < 18" src="../../static/images/day-time.png"></image> -->
+			<!-- <image class="main-bg" v-if="curHours >= 6 && curHours < 18" src="/static/images/day-time.png"></image> -->
 			<!-- <image class="main-bg" v-else src="/static/images/night-time.png"></image> -->
 			<image class="main-bg" src="/static/images/night-time.png"></image>
 			<!-- <view class="main-bg"></view> -->
 			<view class="circles">
 				<view class="circle strategy extend-click" @tap="goStrategy">
-					<image class="img" src="../../static/images/strategy.png" ></image>
+					<image class="img" src="/static/images/strategy.png" ></image>
 					<text class="text">攻略</text>
 				</view>
 				<view class="circle task extend-click" @tap="openTasks">
-					<image class="img" src="../../static/images/task.png" ></image>
+					<image class="img" src="/static/images/task.png" ></image>
 					<text class="text">任务</text>
 				</view>
 				<view class="circle notify extend-click" @tap="goNotify">
-					<image class="img" src="../../static/images/notify.png" ></image>
+					<image class="img" src="/static/images/notify.png" ></image>
 					<text class="text">通知</text>
 				</view>
 			</view>

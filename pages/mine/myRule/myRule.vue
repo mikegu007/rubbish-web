@@ -3,15 +3,15 @@
 		<view class="rule-box">
 			<view class="rule-item" @tap="goPrivacy">
 				<text class="text">隐私政策</text>
-				<image class="indictor extend-click" src="../../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 			<view class="rule-item">
 				<text class="text">用户协议</text>
-				<image class="indictor extend-click" src="../../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 			<view class="rule-item" @tap="goFeedback">
 				<text class="text">意见反馈</text>
-				<image class="indictor extend-click" src="../../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 		</view>
 	</view>

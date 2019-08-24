@@ -1,13 +1,13 @@
 <template name="address-item">
 	<view class="address">
 		<view class="detail">
-			<image v-if="item.isCur" class="address-img" src="/static/images/cur-address.png"></image>
+			<image v-if="item.defaultAddress" class="address-img" src="/static/images/cur-address.png"></image>
 			<view class="info">
-				<view class="buildings">华滋奔腾大厦</view>
-				<view class="road">逸仙路2816号 B栋12楼</view>
+				<view class="buildings">{{ item.address }}</view>
+				<view class="road">{{ item.addressDetail }}</view>
 				<view class="personal">
-					<text>Sofie Hubert</text>
-					<text>18233409878</text>
+					<text>{{ item.name }}</text>
+					<text>{{ item.mobile }}</text>
 				</view>
 			</view>
 		</view>
@@ -29,7 +29,6 @@
 			};
 		},
 		onReady() {
-			console.log(this.item);
 		},
 		methods: {
 			edit() {
@@ -43,11 +42,11 @@
 	.address {
 		display: flex;
 		align-items: center;
-		margin: 0 30rpx;
 		padding: 30rpx;
 		background-color: #fff;
 		box-shadow: 0px 2rpx 6rpx 2rpx rgba(0,0,0,0.06);
 		border-radius: 8rpx;
+		margin-bottom: 30rpx;
 		.edit {
 			height: 36rpx;
 			padding-left: 20rpx;
@@ -62,7 +61,7 @@
 			.address-img {
 				width: 28rpx;
 				height: 34rpx;
-				margin: 5rpx 24rpx 0 0;
+				margin: 6rpx 24rpx 0 0;
 			}
 			.info {
 				flex: 1;

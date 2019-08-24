@@ -1,11 +1,11 @@
 <template>
   <view class="location-wrapper">
     <view class="search">
-      <view class="placeholder">
-        <image class="search-img" src="../../../static/images/search.png"></image>
+      <view v-show="showSearch" class="placeholder">
+        <image class="search-img" src="/static/images/search.png"></image>
         <text class="search-txt">搜索</text>
       </view>
-      <input class="ipt" type="text" v-model="key">
+      <input class="ipt" type="text" v-model="key" @focus="hiddenIcon" @blur="showIcon">
     </view>
     <view class="cur-location">
       <view class="title">当前定位</view>
@@ -19,9 +19,20 @@
 
 <script>
   export default {
+    data() {
+      return {
+        showSearch: true
+      }
+    },
     methods: {
       goBack() {
         uni.navigateBack()
+      },
+      hiddenIcon() {
+        this.showSearch = false
+      },
+      showIcon() {
+        this.showSearch = true
       }
     }
   }

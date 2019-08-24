@@ -3,65 +3,174 @@
 		<view class="info">
 			<view class="form-item">
 				<text class="label">联系人</text>
-				<input class="ipt" name="name" placeholder="请输入姓名" />
+				<input class="ipt" name="name" v-model="form.name" placeholder="请输入姓名" />
 			</view>
 			<view class="form-item">
 				<text class="label">性别</text>
 				<view class="group">
-					<text class="radio active">先生</text>
-					<text class="radio">女士</text>
+					<text class="radio" v-for="gender in genderArr" :class="{'active': form.gender === gender.gender}" :key="gender.gender" @tap="checkGender(gender)">{{ gender.label }}</text>
 				</view>
 			</view>
 			<view class="form-item">
 				<text class="label">电话</text>
-				<input class="ipt" name="mobile" placeholder="请输入电话" />
+				<input class="ipt" name="mobile" v-model="form.mobile" placeholder="请输入电话" />
+			</view>
+			<view class="form-item" @tap="checkAddress">
+				<text class="label">地区</text>
+				<view class="address">
+					<view class="address-ipt" name="address">{{ form.address }}</view>
+					<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
+				</view>
 			</view>
 			<view class="form-item">
 				<text class="label">地址</text>
-				<input class="ipt" name="address" placeholder="请输入地址" />
-				<image class="indictor extend-click" src="../../../static/images/arrow-right.png"></image>
-			</view>
-			<view class="form-item last-item">
-				<text class="label">门牌号</text>
-				<input class="ipt" name="floor" placeholder="请输入门牌号" />
+				<input class="ipt" name="floor" v-model="form.addressDetail" placeholder="请输入门牌号" />
 			</view>
 			<view class="form-item">
 				<text class="label">标签</text>
 				<view class="group">
-					<text class="radio active">家</text>
-					<text class="radio">公司</text>
-					<text class="radio">学校</text>
+					<text class="radio" v-for="sign in signArr" :class="{'active': form.sign === sign.field}" :key="sign.field" @tap="checkSign(sign)">{{ sign.label }}</text>
+				</view>
+			</view>
+			<view class="form-item">
+				<view class="chk">
+					<v-checkbox @check="setDefault"></v-checkbox>
+					<text class="default">设为默认地址</text>
 				</view>
 			</view>
 		</view>
-		<view class="del" @click="delAddress">
-			删除地址
-		</view>
-		<view class="submit">
-			确定
-		</view>
+		<view v-if="form.id" class="del" @click="delAddress">删除地址</view>
+		<view class="submit" @tap="submit">确定</view>
 	</view>
 </template>
 
 <script>
+	import vCheckbox from '../../../components/vCheckbox.vue'
+
+	let $self
 	export default {
+		components: {
+			'v-checkbox': vCheckbox
+		},
 		data() {
 			return {
-				
+				genderArr: [{ label: '男', gender: 1 }, { label: '女', gender: 0 }],
+				signArr: [{ label: '家', field: 0 }, { label: '公司', field: 1 }, { label: '学校', field: 2 }],
+				form: {
+					name: '',
+					gender: 1,
+					mobile: '',
+					address: '省份 城市 县区',
+					addressDetail: '',
+					latitude: '',
+					longitude: '',
+					sign: 0,
+					defaultAddress: false
+				},
+				uuid: ''
+			}
+		},
+		onLoad(options) {
+			$self = this
+			this.uuid = uni.getStorageSync('uuid')
+			if (JSON.stringify(options) !== '{}') {
+				let address = JSON.parse(decodeURIComponent(options.address))
+				this.form = Object.assign({}, address)
+			}
+		},
+		onShow() {
+			let curAddress = uni.getStorageSync('curAddress')
+			// console.log(curAddress)
+			if (curAddress) {
+				let tudeArr = curAddress.location.split(',')
+				let latitude = tudeArr[0]
+				let longitude = tudeArr[1]
+				this.form = Object.assign(this.form, {
+					latitude,
+					longitude,
+					address: curAddress.district,
+					addressDetail: curAddress.name
+				})
+				uni.removeStorageSync('curAddress')
 			}
 		},
 		methods: {
+			checkGender(item) {
+				this.form.gender = item.gender
+			},
+			checkSign(sign) {
+				this.form.sign = sign.field
+			},
+			checkAddress() {
+				uni.navigateTo({
+					url: `../search/search?address=${this.form.addressDetail}`
+				})
+			},
+			setDefault(defaultAdd) {
+				this.form.defaultAddress = defaultAdd
+			},
+			submit() {
+				let param = {
+					address: this.form.address || '',
+					addressDetail: this.form.addressDetail || '',
+					defaultAddress: this.form.defaultAddress || '',
+					latitude: this.form.latitude || '',
+					longitude: this.form.longitude || '',
+					mobile: this.form.mobile || '',
+					name: this.form.name || '',
+					sign: this.form.sign || '',
+					userUuid: this.uuid
+				}
+				if (this.form.id) {
+					param = Object.assign(param, {id: this.form.id})
+				}
+
+				uni.request({
+					url: 'http://49.234.39.19:9022/user/address/edit',
+					method: 'POST',
+					data: param
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1) {
+						let title = param.id ? '地址编辑成功' : '地址新增成功'
+						uni.showToast({
+							title: title,
+							icon: 'success',
+							duration: 1000
+						})
+						uni.navigateBack({})
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: res.data.errMsg,
+							duration: 1000
+						});
+					}
+				})
+			},
 			delAddress() {
 				uni.showModal({
 					title: '删除地址',
 					content: '确认要删除改地址吗？',
-					// showCancel: true,
 					cancelColor: '#808080',
 					confirmColor: '#1DA06E',
 					success: function (res) {
-						// console.log(res)
 						if (res.confirm) {
-							uni.navigateBack({})
+							uni.request({
+								url: 'http://49.234.39.19:9022/user/address/del',
+								// method: 'POST',
+								data: {id: $self.form.id || 0}
+							}).then(infoRes => {
+								let [err, res] = infoRes
+								if (res.data && res.data.status === 1) {
+									uni.showToast({
+										title: '删除成功',
+										icon: 'success',
+										duration: 1000
+									})
+									uni.navigateBack({})
+								}
+							})
 						}
 					}
 				});
@@ -79,10 +188,11 @@
 			border-radius: 8rpx;
 			background-color: #fff;
 			.form-item {
+				box-sizing: border-box;
 				display: flex;
 				align-items: center;
-				height: 76rpx;
-				line-height: 76rpx;
+				height: 90rpx;
+				// line-height: 76rpx;
 				border-bottom: 2rpx solid #E0E0E0;
 				&:last-child {
 					border-bottom: 0;
@@ -93,12 +203,23 @@
 					font-size: 32rpx;
 					color: #4A4A4A;
 				}
+				.address {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					color: #808080;
+					font-size: 32rpx;
+					.address-ipt {
+						flex: 1;
+					}
+				}
 				.ipt {
 					flex: 1;
-					font-size: 28rpx;
+					font-size: 32rpx;
 					color: #808080;
 				}
 				.indictor {
+					margin-left: 20rpx;
 					width: 16rpx;
 					height: 26rpx;
 				}
@@ -123,6 +244,18 @@
 						}
 					}
 				}
+				.chk {
+					height: 36rpx;
+					line-height: 36rpx;
+					display: flex;
+					align-items: center;
+					.default {
+						vertical-align: middle;
+						margin-left: 10rpx;
+						color: #808080;
+						font-size: 32rpx;
+					}
+				}
 			}
 		}
 		.del {
@@ -134,6 +267,9 @@
 			color: #E02020;
 			border-radius: 8rpx;
 			background-color: #fff;
+		}
+		.selection {
+
 		}
 	}
 </style>

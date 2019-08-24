@@ -5,7 +5,7 @@
       <view class="count-txt">等待时间</view>
     </view>
     <view class="order-suc" v-if="type === 'success'">
-      <image class="suc-pic" src="../../static/images/success-orange.png"></image>
+      <image class="suc-pic" src="/static/images/success-orange.png"></image>
       <view class="suc-txt">抢单成功</view>
     </view>
     <view class="tip">{{ tips }}</view>
@@ -32,15 +32,6 @@
         return this.type === 'pending' ? '您的订单已生成，等待抢单！' : '已抢单，请耐心等待工作人员上门！'
       }
     },
-    // filters: {
-    //   timeFilter(val) {
-    //     let min = parseInt(val / 60)
-    //     min = min < 10 ? `0${min}` : min
-    //     let second = val % 60
-    //     second = second < 10 ? `0${second}` : second
-    //     return `${min}:${second}`
-    //   }
-    // },
     mounted() {
       this.countDown()
     },
@@ -110,7 +101,7 @@
       justify-content: center;
       width: 154rpx;
       height: 154rpx;
-      background: url('../../static/images/count-down.png') no-repeat;
+      background: url('/static/images/count-down.png') no-repeat;
       background-size: 100% 100%; 
       .count-time {
         color: #1DA06E;

@@ -11,7 +11,7 @@
 				<text class="text">3个</text>
 			</view>
 		</view>
-		<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+		<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 	</view>
 </template>
 

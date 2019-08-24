@@ -129,7 +129,6 @@ var _default =
 
   },
   onReady: function onReady() {
-    console.log(this.item);
   },
   methods: {
     edit: function edit() {

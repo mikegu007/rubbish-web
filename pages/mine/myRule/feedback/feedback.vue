@@ -2,40 +2,37 @@
 	<view class="feedback">
 		<view class="header">
 			<text class="text">意见主题</text>
-			<image class="img" src="../../../../static/images/arrow-down.png"></image>
+			<image class="img" src="/static/images/arrow-down.png"></image>
 		</view>
 		<view class="content">
 			<view class="suggest">
-				<textarea class="textarea" placeholder="请填写10个字以上的问题描述，以便我们提供更好的帮助！"/>
+				<textarea v-model="content" class="textarea" placeholder="请填写10个字以上的问题描述，以便我们提供更好的帮助！"/>
 			</view>
-			<view class="picture">
+			<!-- <view class="picture">
 				<view class="title">
 					相关截图(选填)
 				</view>
 				<view class="upload">
-					<image class="upload-pic" src="../../../../static/images/add-picture.png"></image>
+					<image class="upload-pic" src="/static/images/add-picture.png"></image>
 				</view>
-			</view>
+			</view> -->
 		</view>
 		<view class="supply">
 			<view class="tip">输入有效联系方式以便开发者联系你</view>
 			<view class="contact">
 				<text class="label">联系方式</text>
-				<input class="ipt" name="name" placeholder="手机号/邮箱" />
+				<input class="ipt" v-model="mobile" name="name" placeholder="手机号/邮箱" />
 			</view>
-			<view class="chkbox">
+			<!-- <view class="chkbox">
 				<v-checkbox class="chk" @check="checkStatus"></v-checkbox>允许开发者在48小时内通过客服消息联系我
-			</view>
+			</view> -->
 		</view>
-		<view class="submit">
-			提交
-		</view>
+		<view class="submit" @tap="submit">提交</view>
 	</view>
 </template>
 
 <script>
 	import vCheckbox from '../../../../components/vCheckbox'
-	
 
 	export default {
 		components: { 
@@ -44,13 +41,51 @@
 		data() {
 			return {
 				form: {
-					active: false
+					active: false,
+					appInfo: '',
+					content: '',
+					mobile: ''
 				}
 			};
+		},
+		onReady() {
+			this.appInfo = uni.getStorageSync('appInfo')
 		},
 		methods: {
 			checkStatus(active) {
 				this.form.active = active
+			},
+			submit() {
+				if (!this.content.trim()) {
+					uni.showToast({
+						title: '请输入反馈内容',
+						icon: 'none'
+					})
+					return
+				} else if (!this.mobile.trim()) {
+					uni.showToast({
+						title: '请输入手机号码',
+						icon: 'none'
+					})
+					return
+				}
+				let param = {
+					openId: this.appInfo.openid,
+					content: `${this.content};${this.mobile}`
+				}
+				uni.request({
+					url: 'http://49.234.39.19:9022/feed/back/add',
+					data: param,
+					method: 'POST'
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1) {
+						uni.showToast({
+							title: '提交成功'
+						})
+						uni.navigateBack({})
+					}
+				})
 			}
 		}
 	}

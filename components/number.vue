@@ -25,6 +25,9 @@
 				this.val = newValue
 			}
 		},
+		onReady() {
+			this.val = this.value
+		},
 		methods: {
 			change(index) {
 				if (this.value === 0 && index < 0) return

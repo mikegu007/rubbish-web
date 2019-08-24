@@ -2,10 +2,10 @@
   <view class="address-setting-wrapper">
     <view class="search">
       <div class="placeholder">
-        <image class="search-img" src="../../../static/images/search.png"></image>
+        <image class="search-img" src="/static/images/search.png"></image>
         <text class="search-txt">搜索</text>
       </div>
-      <input class="ipt" type="text" v-model="key" @focus="goLocation">
+      <view class="ipt" type="text" @tap="goLocation"></view>
     </view>
     <map class="map" :markers="covers"></map>
 		<cover-view class="controls">
@@ -20,7 +20,7 @@
         </cover-view>
       </cover-view>
       <cover-view class="tips">
-        <cover-image class="tips-img" src="../../../static/images/tips.png"></cover-image>
+        <cover-image class="tips-img" src="/static/images/tips.png"></cover-image>
         <cover-view class="tips-tx">您最多可以选择3个小区作为抢单范围</cover-view>
       </cover-view>
     </cover-view>

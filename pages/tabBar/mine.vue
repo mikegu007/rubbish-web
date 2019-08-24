@@ -3,17 +3,17 @@
 		<button v-if="!hasUserInfo" type="primary" open-type="getUserInfo" @getuserinfo="getUserInfo">点击登录</button>
 		<view v-if="hasUserInfo" class="header">
 			<view class="personal">
-				<image class="avator" src="../../static/images/avator.png"></image>
+				<image class="avator" :src="userInfo.avatarUrl"></image>
 				<view class="info">
-					<view class="name">Sebastian Bennett</view>
-					<image class="level" src="../../static/images/rank.png"></image>
+					<view class="name">{{ userInfo.nickName }}</view>
+					<image class="level" src="/static/images/rank.png"></image>
 				</view>
 			</view>
 			<!-- 红包 -->
 			<view class="red-packet" @tap="goRedPackage">
 				<view class="left">
 					<view class="title">红包</view>
-					<view class="content"><text class="num">3</text>个未使用</view>
+					<view class="content"><text class="num">{{ packetNum }}</text>个未使用</view>
 				</view>
 				<view class="right extend-click"></view>
 			</view>
@@ -26,34 +26,34 @@
 				<view class="right extend-click"></view>
 			</view>
 		</view>
-		<view v-if="hasUserInfo" class="category">
+		<view class="category">
 			<view class="item" @tap="goMyAddress">
-				<image class="img" src="../../static/images/address.png"></image>
+				<image class="img" src="/static/images/address.png"></image>
 				<text class="text">我的地址</text>
-				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 			<view class="item" @tap="goMyOrder">
-				<image class="img" src="../../static/images/order.png"></image>
+				<image class="img" src="/static/images/order.png"></image>
 				<text class="text">我的订单</text>
-				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 			<view class="item" @tap="goMyEnergy">
-				<image class="img" src="../../static/images/mall.png"></image>
+				<image class="img" src="/static/images/mall.png"></image>
 				<text class="text">能量商场</text>
-				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 			<view class="item"  @tap="goMyService">
-				<image class="img" src="../../static/images/service.png"></image>
+				<image class="img" src="/static/images/service.png"></image>
 				<text class="text">我的客服</text>
-				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 			<view class="item"  @tap="goMyRule">
-				<image class="img" src="../../static/images/rule.png"></image>
+				<image class="img" src="/static/images/rule.png"></image>
 				<text class="text">规则中心</text>
-				<image class="indictor extend-click" src="../../static/images/arrow-right.png"></image>
+				<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 			</view>
 		</view>
-		<view v-if="showService && hasUserInfo" class="mask">
+		<view v-if="showService" class="mask">
 			<view class="footer">
 				<view class="service">
 					<view class="title">我的客服</view>
@@ -66,38 +66,91 @@
 </template>
 
 <script>
+	import { getLocationSetting } from '../../utils/methods'
+
+	const amapFile = require('../../lib/amap-wx.js')
+	let $self
+
 	export default {
 		data() {
 			return {
 				hasUserInfo: false, // 是否拥有用户信息
-				userInfo: {},
-				showService: false
+				userInfo: {}, // 用户信息
+				showService: false, // 显示服务弹窗
+				packetNum: 0
 			};
 		},
-		onReady () {
+		onReady() {
+			$self = this
 			let userInfo = uni.getStorageSync('userInfo')
 			if (userInfo) {
+				this.userInfo = userInfo.userInfo
 				this.hasUserInfo = true
+				let uuid = uni.getStorageSync('uuid')
+				// if (!uuid) {
+				// 	let appInfo = uni.getStorageSync('appInfo')
+				// 	this.checkUserInfo(this.userInfo.appInfo)
+				// }
 			} else {
 				this.hasUserInfo = false
 			}
 		},
+		onShow() {
+			this.queryPacket()
+		},
 		methods: {
 			// 获取用户信息
 			getUserInfo() {
-				let $self = this
 				uni.getUserInfo({
 					provider: 'weixin',
-					success: function (infoRes) {
-						console.log(infoRes)
+					success(infoRes) {
 						uni.setStorageSync('userInfo', infoRes)
 						$self.hasUserInfo = true
+						$self.userInfo = infoRes.userInfo
+						// uni.getStorageSync('appInfo')
+						let appInfo = uni.getStorageSync('appInfo')
+						$self.addUserInfo(appInfo.openid)
 					},
-					fail: function(err) {
-						console.log(err)
+					fail(err) {
 						$self.hasUserInfo = false
 					}
 				})
+			},
+			// 更新用户信息
+			addUserInfo(openid) {
+				let params = {
+					openId: openid,
+					userImage: $self.userInfo.avatarUrl || '',
+					userMobile: '',
+					userName: $self.userInfo.nickName,
+					userSex: $self.userInfo.gender
+				}
+				uni.request({
+					url: "http://49.234.39.19:9022/user/info/mainTain",
+					method: 'POST',
+					data: params
+				}).then(infoRes => {
+					// let [err, res] = infoRes
+					// if (res.data && res.data.status === 1 && !res.data.errCode) {
+					// 	uni.setStorageSync('uuid', res.data.data)
+					// }
+				})
+			},
+			// 查询红包数量
+			queryPacket() {
+				let uuid = uni.getStorageSync('uuid')
+				if (!uuid) return
+				uni.request({
+					url: 'http://49.234.39.19:9022/red/packet/uuid',
+					data: {
+						uuid: uuid
+					}
+				}).then(infoRes => {
+					let [err, res] = infoRes
+					if (infoRes.data && infoRes.data.status ===1) {
+						$self.packetNum = res.data.data
+					}
+				}).catch(err => reject(err))
 			},
 			// 跳转红包
 			goRedPackage() {
@@ -107,9 +160,27 @@
 			},
 			// 我的地址
 			goMyAddress() {
-				uni.navigateTo({
-					url: '../mine/myAddress/myAddress'
-				})
+				let getLoaction = () => {
+					uni.getLocation({
+						type: 'wgs84',
+						success(res) {
+							let myAmapFun = new amapFile.AMapWX({key: '6942db7499a84fbbc4bd2b2d9221d2bc'});
+							myAmapFun.getRegeo({
+								success(address) {
+									let city = address[0].regeocodeData.addressComponent.city
+									uni.setStorageSync('curCity', city)
+								}
+							})
+							uni.navigateTo({
+								url: '../mine/myAddress/myAddress'
+							})
+						},
+						fail(err) {
+							console.log(err)
+						}
+					})
+				}	
+				getLocationSetting(getLoaction)
 			},
 			// 我的订单
 			goMyOrder() {
@@ -158,6 +229,7 @@
 					width: 132rpx;
 					height: 132rpx;
 					margin-right: 24rpx;
+					border-radius: 50%;
 				}
 				.info {
 					flex: 1;

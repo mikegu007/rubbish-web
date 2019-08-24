@@ -79,39 +79,87 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _amapWx = _interopRequireDefault(__webpack_require__(/*! ./lib/amap-wx */ "../../../../../volcano/develop/my-uniapp/lib/amap-wx.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}
+var $self;var _default =
 {
   onLaunch: function onLaunch() {
+    $self = this;
     var appInfo = uni.getStorageSync('appInfo');
-    if (!appInfo) {
-      uni.login({
-        provider: 'weixin',
-        success: function success(loginRes) {
-          console.log(loginRes);
-          if (loginRes.code) {
-            var appId = 'wx0c05632ffc644b36';
-            var appSecret = '8018b076c849cc483d07f6fe81a485f3';
-            uni.request({
-              url: "https://api.weixin.qq.com/sns/jscode2session?appid=".concat(appId, "&secret=").concat(appSecret, "&js_code=").concat(loginRes.code, "&grant_type=authorization_code"),
-              data: {
-                userInfoDto: '021akbX714euWL1vnpW71vFrX71akbXr' } }).
+    if (appInfo) return;
+    uni.login({
+      provider: 'weixin',
+      success: function success(loginRes) {
+        if (loginRes.code) {
+          var appId = 'wx0c05632ffc644b36';
+          var appSecret = '8018b076c849cc483d07f6fe81a485f3';
+          uni.request({
+            url: "https://api.weixin.qq.com/sns/jscode2session?appid=".concat(appId, "&secret=").concat(appSecret, "&js_code=").concat(loginRes.code, "&grant_type=authorization_code"),
+            data: {
+              userInfoDto: '021akbX714euWL1vnpW71vFrX71akbXr' } }).
 
 
-            then(function (data) {var _data = _slicedToArray(
-              data, 2),err = _data[0],res = _data[1];
-              if (res.data && res.data.openid && res.data.session_key) {
-                uni.setStorageSync('appInfo', JSON.stringify(res.data));
-              }
-            });
-          }
-        } });
+          then(function (data) {var _data = _slicedToArray(
+            data, 2),err = _data[0],res = _data[1];
+            if (res.data && res.data.openid && res.data.session_key) {
+              uni.setStorageSync('appInfo', res.data);
+              $self.checkUserInfo(res.data.openid);
+            }
+          });
+        }
+      } });
 
-    }
   },
   onShow: function onShow() {
   },
   onHide: function onHide() {
-  } };exports.default = _default;
+  },
+  methods: {
+    // 检查用户
+    checkUserInfo: function checkUserInfo(openid) {
+      this.queryUserInfo(openid).then(function (infoRes) {var _infoRes = _slicedToArray(
+        infoRes, 2),err = _infoRes[0],res = _infoRes[1];
+        // 未找到当前用户，新增用户
+        if (res.data && res.data.status === 0) {
+          $self.addUserInfo(openid);
+        } else {
+          uni.setStorageSync('uuid', res.data.data.uuid);
+        }
+      }).catch(function (err) {return console.log(err);});
+    },
+    // 新增用户信息
+    addUserInfo: function addUserInfo(openid) {
+      var params = {
+        openId: openid
+        // userImage: $self.userInfo.avatarUrl || '',
+        // userMobile: '',
+        // userName: $self.userInfo.nickName,
+        // userSex: $self.userInfo.gender
+      };
+      uni.request({
+        url: "http://49.234.39.19:9022/user/info/mainTain",
+        method: 'POST',
+        data: params }).
+      then(function (infoRes) {var _infoRes2 = _slicedToArray(
+        infoRes, 2),err = _infoRes2[0],res = _infoRes2[1];
+        if (res.data && res.data.status === 1 && !res.data.errCode) {
+          uni.setStorageSync('uuid', res.data.data);
+        }
+      });
+    },
+    // 查询用户信息
+    queryUserInfo: function queryUserInfo(openId) {
+      return new Promise(function (resolve, reject) {
+        uni.request({
+          url: 'http://49.234.39.19:9022/user/info/openId',
+          data: {
+            openId: openId } }).
+
+        then(function (infoRes) {
+          resolve(infoRes);
+        }).catch(function (err) {return reject(err);});
+      });
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
