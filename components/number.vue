@@ -1,8 +1,8 @@
 <template name="number">
 	<view class="number">
-		<view class="down extend-click" @tap="change(-1)"></view>
-		<input class="ipt" type="text" :value="val" />
-		<view class="top extend-click" @tap="change(1)"></view>
+		<view class="down extend-click" @tap="increase(-1)"></view>
+		<input class="ipt" type="text" :value="val" @input="inputHandle"/>
+		<view class="top extend-click" @tap="increase(1)"></view>
 	</view>
 </template>
 
@@ -18,21 +18,27 @@
 			value: {
 				type: Number,
 				default: 0
+			},
+			field: {
+				type: String
 			}
 		},
 		watch: {
-			value(newValue) {
-				this.val = newValue
+			value(newVal) {
+				this.val = newVal
 			}
 		},
 		onReady() {
 			this.val = this.value
 		},
 		methods: {
-			change(index) {
-				if (this.value === 0 && index < 0) return
+			increase(index) {
+				if (this.val === 0 && index < 0) return
 				this.value += index
-				this.$emit('change', index)
+				this.$emit('increase', { index: index, field: this.field })
+			},
+			inputHandle(e) {
+				this.$emit('change', { val: e.detail.value, field: this.field })
 			}
 		}
 	}

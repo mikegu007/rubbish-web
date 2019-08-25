@@ -3,15 +3,15 @@
     <view class="info">
       <image class="location" src="../static/images/location.png"></image>
       <view class="order-info">
-        <view class="build">{{ orderItem.location }}</view>
-        <view class="date">订单日期：{{ orderItem.date }}</view>
-        <view class="description">垃圾类别：厕所垃圾+厨房垃圾+客厅垃圾+其他</view>
+        <view class="build">{{ orderItem.addressName }}</view>
+        <view class="date">订单日期：{{ date }}</view>
+        <!-- <view class="description">垃圾类别：厕所垃圾+厨房垃圾+客厅垃圾+其他</view> -->
       </view>
     </view>
     <view class="order-status">
       <view class="dot"></view>
-      <view class="status-txt" :class="{'active': orderItem.type === 1 || orderItem.type === 3}">{{ statusTxt }}</view>
-      <view class="order-amount">¥<text class="num">{{ orderItem.amount }}</text></view>
+      <view class="status-txt" :class="{'resolved': orderItem.orderStatus === 4, 'pending': orderItem.orderStatus < 4 && orderItem.orderStatus > 0 }">{{ statusTxt }}</view>
+      <view class="order-amount">¥<text class="num">{{ orderItem.total }}</text></view>
     </view>
     <image class="order-bg" :src="bgSrc"></image>
   </view>
@@ -26,19 +26,39 @@
       }
     },
     computed: {
-      bgSrc() { // 0 1 2 3分别表示执行中、下单完成、抢单执行中、抢单完成
-        if (this.orderItem.type === 0 || this.orderItem.type === 1) {
+      // 下单
+      bgSrc() { 
+        if (this.orderItem.type === 0) {
           return '../static/images/place.png'
-        } else {
+        } else if (this.orderItem.type === 1){
           return '../static/images/grab.png'
         }
       },
-      statusTxt() {
-        if (this.orderItem.type === 0 || this.orderItem.type === 2) {
-          return '订单执行中'
+      // 日期
+      date() {
+        if (this.orderItem.finishTime) {
+          return this.orderItem.finishTime
+        } else if (this.orderItem.startTime) {
+          return this.orderItem.startTime
+        } else if (this.orderItem.payTime) {
+          return this.orderItem.payTime
         } else {
-          return '订单已完成'
+          return ''
         }
+      },
+      // 0 1 2 3 4分别表示已取消、待付款、待抢单、待完成、已完成
+      statusTxt() {
+        if (this.orderItem.orderStatus === 0) {
+          return '已取消'
+        } else if (this.orderItem.orderStatus === 1) {
+          return '待付款'
+        } else if (this.orderItem.orderStatus === 2) {
+          return '待抢单'
+        } else if (this.orderItem.orderStatus === 3) {
+          return '待完成'
+        } else if (this.orderItem.orderStatus === 4) {
+          return '已完成'
+        } 
       }
     }
   }
@@ -100,8 +120,12 @@
       }
       .status-txt {
         flex: 1;
-        &.active {
+        color: #C0C0C0;
+        &.pending {
           color: #F7B500;
+        }
+        &.resolved {
+          color: #1DA06E;
         }
       }
       .order-amount {

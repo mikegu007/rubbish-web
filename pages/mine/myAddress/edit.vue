@@ -126,7 +126,7 @@
 				}
 
 				uni.request({
-					url: 'http://49.234.39.19:9022/user/address/edit',
+					url: 'https://messagecome.com:9022/user/address/edit',
 					method: 'POST',
 					data: param
 				}).then(infoRes => {
@@ -157,7 +157,7 @@
 					success: function (res) {
 						if (res.confirm) {
 							uni.request({
-								url: 'http://49.234.39.19:9022/user/address/del',
+								url: 'https://messagecome.com:9022/user/address/del',
 								// method: 'POST',
 								data: {id: $self.form.id || 0}
 							}).then(infoRes => {

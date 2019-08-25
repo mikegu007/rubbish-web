@@ -86,11 +86,7 @@
 			if (userInfo) {
 				this.userInfo = userInfo.userInfo
 				this.hasUserInfo = true
-				let uuid = uni.getStorageSync('uuid')
-				// if (!uuid) {
-				// 	let appInfo = uni.getStorageSync('appInfo')
-				// 	this.checkUserInfo(this.userInfo.appInfo)
-				// }
+				// let uuid = uni.getStorageSync('uuid')
 			} else {
 				this.hasUserInfo = false
 			}
@@ -126,14 +122,14 @@
 					userSex: $self.userInfo.gender
 				}
 				uni.request({
-					url: "http://49.234.39.19:9022/user/info/mainTain",
+					url: "https://messagecome.com:9022/user/info/mainTain",
 					method: 'POST',
 					data: params
 				}).then(infoRes => {
-					// let [err, res] = infoRes
-					// if (res.data && res.data.status === 1 && !res.data.errCode) {
-					// 	uni.setStorageSync('uuid', res.data.data)
-					// }
+					let [err, res] = infoRes
+					if (res.data && res.data.status === 1 && !res.data.errCode) {
+						uni.setStorageSync('uuid', res.data.data)
+					}
 				})
 			},
 			// 查询红包数量
@@ -141,7 +137,7 @@
 				let uuid = uni.getStorageSync('uuid')
 				if (!uuid) return
 				uni.request({
-					url: 'http://49.234.39.19:9022/red/packet/uuid',
+					url: 'https://messagecome.com:9022/red/packet/uuid',
 					data: {
 						uuid: uuid
 					}
@@ -164,7 +160,7 @@
 					uni.getLocation({
 						type: 'wgs84',
 						success(res) {
-							let myAmapFun = new amapFile.AMapWX({key: '6942db7499a84fbbc4bd2b2d9221d2bc'});
+							let myAmapFun = new amapFile.AMapWX({key: '253f8eb5f9c6084e388cbd85ef0982ee'});
 							myAmapFun.getRegeo({
 								success(address) {
 									let city = address[0].regeocodeData.addressComponent.city

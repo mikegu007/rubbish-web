@@ -5,7 +5,7 @@
       <view class="order-info">
         <view class="location">
           <text class="label">地址:</text>
-          <text class="text">{{ item.location }}</text>
+          <text class="text">{{ item.addressName }}</text>
         </view>
         <view class="location">
           <text class="label">数量:</text>
@@ -13,8 +13,9 @@
         </view>
       </view>
       <view class="status">
-        <view v-if="item.type === 0" class="grabing extend-click" @tap="grab(item)">抢单</view>
-        <view v-if="item.type === 1" class="success">抢单成功</view>
+        <view v-if="item.orderStatus === 2" class="grabing extend-click" @tap.stop="grab(item)">抢单</view>
+        <view v-if="item.orderStatus === 1" class="success">抢单成功</view>
+        <view class="success">去这里</view>
       </view>
     </view>
   </view>
@@ -34,9 +35,7 @@
         this.$emit('grab', item)
       },
       checkDetail(item) {
-        if (item.type === 1) {
-          this.$emit('check-detail', item)
-        }
+        this.$emit('check-detail', item)
       }
     }
   }

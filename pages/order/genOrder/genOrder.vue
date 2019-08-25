@@ -22,9 +22,9 @@
     name: 'gen-order',
     data() {
       return {
-        time: 180,
+        time: 300,
         timer: null,
-        type: 'success' // pending 等待中  success 成功抢单
+        type: 'pending' // pending 等待中  success 成功抢单
       }
     },
     computed: {
@@ -60,9 +60,6 @@
           success: function (res) {
             if (res.confirm) {
               $self.$emit('cancel')
-              uni.navigateTo({
-                url: '../order/cancelOrder/cancelOrder'
-              })  
             }
           }
          })
@@ -101,7 +98,7 @@
       justify-content: center;
       width: 154rpx;
       height: 154rpx;
-      background: url('/static/images/count-down.png') no-repeat;
+      background: url('../../../static/images/count-down.png') no-repeat;
       background-size: 100% 100%; 
       .count-time {
         color: #1DA06E;

@@ -49,7 +49,7 @@ export default {
     bindInput: function() {
       let keywords = $self.addressName
       if (!keywords.trim()) return;
-      let myAmapFun = new amapFile.AMapWX({key: '6942db7499a84fbbc4bd2b2d9221d2bc'});
+      let myAmapFun = new amapFile.AMapWX({key: '253f8eb5f9c6084e388cbd85ef0982ee'});
       myAmapFun.getInputtips({
         keywords,
         type: '分类代码',

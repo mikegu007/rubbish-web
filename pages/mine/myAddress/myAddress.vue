@@ -55,7 +55,7 @@
 			// 请求地址列表
 			queryAddList() {
 				uni.request({
-					url: 'http://49.234.39.19:9022/user/address/list',
+					url: 'https://messagecome.com:9022/user/address/list',
 					data: {
 						uuid: $self.uuid
 					}

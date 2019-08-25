@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var OrderItem = function OrderItem() {return __webpack_require__.e(/*! import() | components/orderItem */ "components/orderItem").then(__webpack_require__.bind(null, /*! ../../../components/orderItem.vue */ "../../../../../volcano/develop/my-uniapp/components/orderItem.vue"));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var OrderItem = function OrderItem() {return __webpack_require__.e(/*! import() | components/orderItem */ "components/orderItem").then(__webpack_require__.bind(null, /*! ../../../components/orderItem.vue */ "../../../../../volcano/develop/my-uniapp/components/orderItem.vue"));};
 
 
 
@@ -107,44 +107,76 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+var $self;var _default =
 {
   components: {
     'order-item': OrderItem },
 
   data: function data() {
     return {
+      uuid: '',
+      curIndex: 0,
       orderList: [
-      {
-        location: '逸仙路2816号 华滋奔腾大厦B座',
-        date: '2019-01-10 11:11',
-        amount: 30,
-        type: 0,
-        id: 0 },
+        // {
+        // 	addressName: '逸仙路2816号 华滋奔腾大厦B座',
+        // 	date: '2019-01-10 11:11',
+        // 	amount: 30,
+        // 	type: 0,
+        // 	id: 0
+        // }
+      ] };
 
-      {
-        location: '逸仙路2816号 华滋奔腾大厦B座',
-        date: '2019-01-10 11:11',
-        amount: 30,
-        type: 1,
-        id: 1 },
-
-      {
-        location: '逸仙路2816号 华滋奔腾大厦B座',
-        date: '2019-01-10 11:11',
-        amount: 30,
-        type: 2,
-        id: 2 },
-
-      {
-        location: '逸仙路2816号 华滋奔腾大厦B座',
-        date: '2019-01-10 11:11',
-        amount: 30,
-        type: 3,
-        id: 3 }] };
+  },
+  onReady: function onReady() {
+    $self = this;
+    this.uuid = uni.getStorageSync('uuid');
+    this.getOrderList();
+  },
+  methods: {
+    getOrderList: function getOrderList() {
+      uni.request({
+        url: 'http://49.234.39.19:9022/order/myOrders',
+        method: 'POST',
+        data: {
+          "length": 10,
+          "start": $self.curIndex,
+          "uuid": $self.uuid } }).
 
 
-
-  } };exports.default = _default;
+      then(function (infoRes) {var _infoRes = _slicedToArray(
+        infoRes, 2),err = _infoRes[0],res = _infoRes[1];
+        console.log(res);
+        if (res.data && res.data.data) {
+          $self.formatList(res.data.data);
+          $self.orderList = res.data.data;
+        }
+      });
+    },
+    formatList: function formatList(list) {
+      list && list.forEach(function (item) {
+        // type为1为抢单， type为0是下单
+        if (item.workUuid === $self.uuid) {
+          item.type = 1;
+        } else {
+          item.type = 0;
+        }
+        var total = 0;
+        // 计算订单金额
+        if (item.orderDetailVos) {
+          item.orderDetailVos.forEach(function (classify) {
+            if (classify.classifyType === 2) {
+              total += 3 * classify.classifyCount;
+            } else if (classify.classifyType === 1) {
+              total += 5 * classify.classifyCount;
+            } else if (classify.classifyType === 0) {
+              total += 7 * classify.classifyCount;
+            }
+          });
+        }
+        item.total = total;
+      });
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

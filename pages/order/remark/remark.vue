@@ -23,9 +23,6 @@
     },
     methods: {
       submit() {
-        let pages = getCurrentPages()
-        let prevPage = pages[pages.length - 2]
-        prevPage.data.placeOrderInfo.remark = this.remark
         this.$eventBus.$emit(REFRESH_REMARK, this.remark)
         uni.navigateBack({})
       }

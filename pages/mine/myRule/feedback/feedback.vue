@@ -74,7 +74,7 @@
 					content: `${this.content};${this.mobile}`
 				}
 				uni.request({
-					url: 'http://49.234.39.19:9022/feed/back/add',
+					url: 'https://messagecome.com:9022/feed/back/add',
 					data: param,
 					method: 'POST'
 				}).then(infoRes => {

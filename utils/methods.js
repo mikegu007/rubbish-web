@@ -1,3 +1,5 @@
+import md5 from '../lib/md5.js'
+
 /**
  * 防抖
  * @param {*} fn 执行的方法
@@ -17,6 +19,25 @@ function debounce(fn, wait) {
     }, wait)
   }
 }
+
+// 生成成都为len的随机字符串
+function getRandomString(len) {
+  let originalStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', str = '', index = 0
+  for (let i = 0; i < len; i++) {
+    index = Math.floor(Math.random() * str.length)
+    str += originalStr[index]
+  }
+  return str
+}
+
+function genSign(param = {}) {
+  let keys = Object.keys(param).sort()
+  let strArr = []
+  for (let key of keys) {
+    strArr.push(`key=${param[key]}`)
+  }
+  return md5(strArr.join('&'))
+ }
 
 /**
  * 用户地址授权
@@ -71,4 +92,4 @@ function getLocationSetting(callback) {
   })
 }
 
-export { debounce, getLocationSetting }
+export { debounce, getLocationSetting, getRandomString, genSign }

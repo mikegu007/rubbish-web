@@ -5,13 +5,15 @@
       <view class="reason-item" v-for="(item, $index) in reasons" :class="{'active': $index === checkedIndex}" :key="item.id" @tap="checkReason(item, $index)">{{ item.label }}</view>
     </view>
     <view class="remark">
-      <textarea class="textarea" placeholder="填写额外对工作人员备注的信息"/>
+      <textarea class="textarea" v-model="remark" placeholder="填写额外对工作人员备注的信息"/>
     </view>
-    <view class="submit">提交</view>
+    <view class="submit" @tap="cancelOrder">提交</view>
   </view>
 </template>
 
 <script>
+  import { REFRESH_ORDERING } from '../../../utils/constant.js'
+
   export default {
     data() {
       return {
@@ -22,14 +24,30 @@
           {label: '本次下单操作纯属失误', id: 3}
         ],
         checkedIndex: null,
-        checkedReason: ''
+        checkedReason: '',
+        remark: ''
       }
     },
     methods: {
      checkReason(item, index) {
        this.checkedReason = item
        this.checkedIndex = index
-     } 
+     },
+     cancelOrder() {
+       let $self = this
+       let remark = `${this.checkReason};${this.checkedReason}`
+       uni.request({
+         url: `https://messagecome.com:9022/order/cancelOrder?orderNo=${oder201908240001}&remark=${remark}`,
+         method: 'POST'
+       })
+        .then(infoRes => {
+          let [err, res] = infoRes
+          if (res.data && res.data.status === 1) {
+            $self.$eventBus.$emit(REFRESH_ORDERING)
+            uni.navigateBack({})
+          }
+        })
+     }
     }
   }
 </script>
@@ -70,9 +88,11 @@
       border-radius: 8rpx;
       margin-bottom: 54rpx;
       .textarea {
+        height: 128rpx;
         color: #989898;
         font-size: 28rpx;
-        line-height: 36rpx
+        line-height: 36rpx;
+        overflow: auto;
       }
     }
   }
