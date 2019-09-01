@@ -65,7 +65,7 @@
 <script>
 	import Number from '../../../components/number.vue'
 	import vCheckbox from '../../../components/vCheckbox.vue'
-	import { REFRESH_REMARK } from '../../../utils/constant.js'
+	import { REFRESH_REMARK, REFRESH_ORDERLIST } from '../../../utils/constant.js'
 	import { getRandomString, genSign } from '../../../utils/methods.js'
 	// import GenOrder from '../genOrder/genOrder.vue'
 
@@ -79,7 +79,6 @@
 		},
 		data() {
 			return {
-				// ordering: true, // 是否正在下单
 				// 袋子
 				packages: [
 					{ title: '小型袋子', field: 'smallNum' },
@@ -107,18 +106,18 @@
 		},
 		onReady() {
 			$self = this
-			let uuid = uni.getStorageSync('uuid')
-			this.uuid = uuid ? uuid : ''
-			this.queryAddList()
-			this.queryPacket()
+			this.loadHandle()
 			// 监听备注字段的刷新
 			this.$eventBus.$on(REFRESH_REMARK, this.refreshRemark)
+			this.$eventBus.$on(REFRESH_ORDERLIST, () => {
+				this.loadHandle()
+			})
 		},
 		methods: {
 			// 请求地址列表
 			queryAddList() {
 				uni.request({
-					url: 'https://messagecome.com:9022/user/address/list',
+					url: 'https://messagecome.com/user/address/list',
 					data: {
 						uuid: $self.uuid
 					}
@@ -156,7 +155,7 @@
 				let uuid = uni.getStorageSync('uuid')
 				if (!uuid) return
 				uni.request({
-					url: 'https://messagecome.com:9022/red/packet/uuid',
+					url: 'https://messagecome.com/red/packet/uuid',
 					data: {
 						uuid: uuid
 					}
@@ -175,6 +174,13 @@
 			},
 			refreshRemark(remark) {
 				this.placeOrderInfo.remark = remark
+			},
+			// 加载
+			loadHandle() {
+				let uuid = uni.getStorageSync('uuid')
+				this.uuid = uuid ? uuid : ''
+				this.queryAddList()
+				this.queryPacket()
 			},
 			increaseNum(opt) {
 				// console.log(opt)
@@ -204,6 +210,19 @@
 				uni.navigateTo({
 					url: `../order/remark/remark?remark=${this.placeOrderInfo.remark}`
 				})
+			},
+			// 与订单号
+			queryWxOrderNo() {
+				uni.request({
+					url: 'https://messagecome.com/wx/payCallback',
+					method: 'POST'
+				})
+					.then(infoRes => {
+						let [err, res] = infoRes
+						console.log(infoRes)
+						if (res.data && res.data.status === 1) {
+						}
+					})
 			},
 			// 提交订单
 			submitOrder() {
@@ -242,7 +261,7 @@
 					userUuid: this.uuid
 				}
 				uni.request({
-					url: 'https://messagecome.com:9022/order/addOrder',
+					url: 'https://messagecome.com/order/addOrder',
 					method: 'POST',
 					data: param
 				})
@@ -250,8 +269,8 @@
 						let [err, res] = data
 						console.log(data)
 						if (res.data && res.data.status === 1) {
-							$self.$emit('submit')
-							$self.ordering = false
+							$self.queryWxOrderNo()
+							// $self.$emit('submit')
 							// let payParams = {
 							// 	provider: 'wxpay',
 							// 	timeStamp: String(+new Date()),

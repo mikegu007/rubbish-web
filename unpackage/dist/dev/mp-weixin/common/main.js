@@ -79,14 +79,14 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _amapWx = _interopRequireDefault(__webpack_require__(/*! ./lib/amap-wx */ "../../../../../volcano/develop/my-uniapp/lib/amap-wx.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}
 var $self;var _default =
 {
   onLaunch: function onLaunch() {
     $self = this;
     var appInfo = uni.getStorageSync('appInfo');
-    if (appInfo) return;
+    var uuid = uni.getStorageSync('uuid');
+    if (appInfo && uuid) return;
     uni.login({
       provider: 'weixin',
       success: function success(loginRes) {
@@ -137,7 +137,7 @@ var $self;var _default =
         // userSex: $self.userInfo.gender
       };
       uni.request({
-        url: "http://49.234.39.19:9022/user/info/mainTain",
+        url: "https://messagecome.com/user/info/mainTain",
         method: 'POST',
         data: params }).
       then(function (infoRes) {var _infoRes2 = _slicedToArray(
@@ -151,7 +151,7 @@ var $self;var _default =
     queryUserInfo: function queryUserInfo(openId) {
       return new Promise(function (resolve, reject) {
         uni.request({
-          url: 'http://49.234.39.19:9022/user/info/openId',
+          url: 'https://messagecome.com/user/info/openId',
           data: {
             openId: openId } }).
 

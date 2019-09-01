@@ -174,7 +174,7 @@ __webpack_require__.r(__webpack_exports__);
         content: "".concat(this.content, ";").concat(this.mobile) };
 
       uni.request({
-        url: 'http://49.234.39.19:9022/feed/back/add',
+        url: 'https://messagecome.com/feed/back/add',
         data: param,
         method: 'POST' }).
       then(function (infoRes) {var _infoRes = _slicedToArray(

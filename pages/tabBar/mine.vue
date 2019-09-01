@@ -67,8 +67,7 @@
 
 <script>
 	import { getLocationSetting } from '../../utils/methods'
-
-	const amapFile = require('../../lib/amap-wx.js')
+	import amap from '../../utils/amap'
 	let $self
 
 	export default {
@@ -122,7 +121,7 @@
 					userSex: $self.userInfo.gender
 				}
 				uni.request({
-					url: "https://messagecome.com:9022/user/info/mainTain",
+					url: "https://messagecome.com/user/info/mainTain",
 					method: 'POST',
 					data: params
 				}).then(infoRes => {
@@ -137,7 +136,7 @@
 				let uuid = uni.getStorageSync('uuid')
 				if (!uuid) return
 				uni.request({
-					url: 'https://messagecome.com:9022/red/packet/uuid',
+					url: 'https://messagecome.com/red/packet/uuid',
 					data: {
 						uuid: uuid
 					}
@@ -160,13 +159,12 @@
 					uni.getLocation({
 						type: 'wgs84',
 						success(res) {
-							let myAmapFun = new amapFile.AMapWX({key: '253f8eb5f9c6084e388cbd85ef0982ee'});
-							myAmapFun.getRegeo({
-								success(address) {
+							amap.getRegeo({})
+								.then(address => {
 									let city = address[0].regeocodeData.addressComponent.city
 									uni.setStorageSync('curCity', city)
-								}
-							})
+								})
+								
 							uni.navigateTo({
 								url: '../mine/myAddress/myAddress'
 							})

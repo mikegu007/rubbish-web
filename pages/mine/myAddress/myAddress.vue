@@ -55,14 +55,14 @@
 			// 请求地址列表
 			queryAddList() {
 				uni.request({
-					url: 'https://messagecome.com:9022/user/address/list',
+					url: 'https://messagecome.com/user/address/list',
 					data: {
 						uuid: $self.uuid
 					}
 				}).then(infoRes => {
 					let [err, res] = infoRes
 					if (res.data && res.data.status === 1) {
-						this.addressList = res.data.data
+						$self.addressList = res.data.data
 					}
 				})
 			},
@@ -86,6 +86,7 @@
 <style lang="scss" scoped>
 	.myaddress {
 		.default {
+			box-sizing: border-box;
 			padding: 10rpx 30rpx 0;
 			.title {
 				margin-left: 30rpx;
@@ -93,6 +94,7 @@
 			}
 		}
 		.others {
+			box-sizing: border-box;
 			padding-top: 10rpx;
 			padding-bottom: 60rpx;
 			.list {

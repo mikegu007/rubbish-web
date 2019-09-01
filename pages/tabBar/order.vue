@@ -6,9 +6,9 @@
 			</view>
 		</view>
 		<place-order v-if="activeIndex === 0 && ordering" @submit="submit"></place-order>
-		<grab-order v-if="activeIndex === 1"></grab-order>
 		<!-- 取消订单 -->
-		<gen-order v-if="!ordering" @cancel="cancelOrder" @continue="continueOrder"></gen-order>
+		<gen-order v-else-if="activeIndex === 0 && !ordering" @cancel="cancelOrder" @continue="continueOrder"></gen-order>
+		<grab-order v-else-if="activeIndex === 1"></grab-order>
 	</view>
 </template>
 
@@ -16,7 +16,7 @@
 	import PlaceOrder from '../order/placeOrder/placeOrder.vue'
 	import GenOrder from '../order/genOrder/genOrder.vue'
 	import GrabOrder from '../order/grabOrder/grabOrder.vue'
-	import { REFRESH_ORDERING } from '../../utils/constant.js'
+	import { REFRESH_ORDERING, REFRESH_ORDERLIST } from '../../utils/constant.js'
 
 	let $self;
 	export default {
@@ -37,6 +37,9 @@
 		},
 		onReady() {
 			this.$eventBus.$on(REFRESH_ORDERING, this.refreshOrderStatus)
+		},
+		onShow() {
+			this.$eventBus.$emit(REFRESH_ORDERLIST)
 		},
 		methods: {
 			// 切换 下单 订单

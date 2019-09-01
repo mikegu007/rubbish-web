@@ -83,8 +83,8 @@
 			// console.log(curAddress)
 			if (curAddress) {
 				let tudeArr = curAddress.location.split(',')
-				let latitude = tudeArr[0]
-				let longitude = tudeArr[1]
+				let longitude = tudeArr[0]
+				let latitude = tudeArr[1]
 				this.form = Object.assign(this.form, {
 					latitude,
 					longitude,
@@ -126,7 +126,7 @@
 				}
 
 				uni.request({
-					url: 'https://messagecome.com:9022/user/address/edit',
+					url: 'https://messagecome.com/user/address/edit',
 					method: 'POST',
 					data: param
 				}).then(infoRes => {
@@ -157,7 +157,7 @@
 					success: function (res) {
 						if (res.confirm) {
 							uni.request({
-								url: 'https://messagecome.com:9022/user/address/del',
+								url: 'https://messagecome.com/user/address/del',
 								// method: 'POST',
 								data: {id: $self.form.id || 0}
 							}).then(infoRes => {

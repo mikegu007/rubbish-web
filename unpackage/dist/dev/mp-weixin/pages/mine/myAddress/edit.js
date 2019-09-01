@@ -183,8 +183,8 @@ var $self;var _default =
     // console.log(curAddress)
     if (curAddress) {
       var tudeArr = curAddress.location.split(',');
-      var latitude = tudeArr[0];
-      var longitude = tudeArr[1];
+      var longitude = tudeArr[0];
+      var latitude = tudeArr[1];
       this.form = Object.assign(this.form, {
         latitude: latitude,
         longitude: longitude,
@@ -226,7 +226,7 @@ var $self;var _default =
       }
 
       uni.request({
-        url: 'http://49.234.39.19:9022/user/address/edit',
+        url: 'https://messagecome.com/user/address/edit',
         method: 'POST',
         data: param }).
       then(function (infoRes) {var _infoRes = _slicedToArray(
@@ -257,7 +257,7 @@ var $self;var _default =
         success: function success(res) {
           if (res.confirm) {
             uni.request({
-              url: 'http://49.234.39.19:9022/user/address/del',
+              url: 'https://messagecome.com/user/address/del',
               // method: 'POST',
               data: { id: $self.form.id || 0 } }).
             then(function (infoRes) {var _infoRes2 = _slicedToArray(

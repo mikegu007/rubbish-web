@@ -35,7 +35,7 @@
 		methods: {
 			getOrderList() {
 				uni.request({
-					url: 'https://messagecome.com:9022/order/myOrders',
+					url: 'https://messagecome.com/order/myOrders',
 					method: 'POST',
 					data: {
 						"length": 10,

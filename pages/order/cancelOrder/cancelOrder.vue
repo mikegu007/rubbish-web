@@ -37,7 +37,7 @@
        let $self = this
        let remark = `${this.checkReason};${this.checkedReason}`
        uni.request({
-         url: `https://messagecome.com:9022/order/cancelOrder?orderNo=${oder201908240001}&remark=${remark}`,
+         url: `https://messagecome.com/order/cancelOrder?orderNo=${oder201908240001}&remark=${remark}`,
          method: 'POST'
        })
         .then(infoRes => {

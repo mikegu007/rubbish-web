@@ -19,7 +19,7 @@
 <style lang="scss" scoped>
   .tips {
     width: 100%;
-    margin-top: 100rpx;
+    padding-top: 100rpx;
     font-size: 32rpx;
     text-align: center;
     color: #808080;

@@ -3,13 +3,13 @@
     <view class="location" @tap="goAddSetting">
       <view class="info">
         <view class="item">
-          <text class="label">我的定位：</text>
-          <text class="text">逸仙路2816号 华滋奔腾大厦B座</text>
+          <text class="label">我的定位</text>
+          <text class="text">{{ curLoaction.address }}</text>
         </view>
-        <view class="item">
+        <!-- <view class="item">
           <text class="label">抢单小区：</text>
           <text class="text">3个</text>
-        </view>
+        </view> -->
       </view>
       <image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
     </view>
@@ -70,9 +70,10 @@
 </template>
 
 <script>
-  import GrabList from '../../../components/grabList.vue'
-  
-  let $self
+	import GrabList from '../../../components/grabList.vue'
+	import amap from '../../../utils/amap'
+	
+	let $self
   export default {
     name: 'grab-order',
     components: {
@@ -86,13 +87,14 @@
         orderDetailShow: false, // 订单详情
         curLoaction: { // 当前经纬度
           longitude: '',
-          latitude: ''
+					latitude: '',
+					address: ''
         },
         // 抢单列表
 				grabData: [
 					// { avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 1, id: 0 }
         ],
-        curOrderDetail: {}, // 当前商品明细
+        curOrderDetail: {}, // 当前订单明细
 				curOrderNo: ''
       }
     },
@@ -104,35 +106,43 @@
     },
     methods: {
 			goAddSetting() {
+				let latitude2 = 22.674162
+				let longtitude2 = 113.900034
+				let name = 'hhhhhh'
+				let desc = 'ggggg'
 				uni.navigateTo({
-					url: '../order/addressSetting/addressSetting'
+					url: `../order/addressSetting/addressSetting?longtitude1=${$self.curLoaction.longitude}&latitude1=${$self.curLoaction.latitude}&longtitude2=${longtitude2}&latitude2=${latitude2}&name=${name}$desc=${desc}`
 				})
       },
       // 获取当前经纬度
       getCurLocation() {
-        uni.getLocation({
-          type: 'wgs84',
-          success: function (res) {
-            // console.log(res)
-            $self.curLoaction = Object.assign({}, {
-              longitude: res.longitude,
-              latitude: res.latitude
-            })
-            // 获取订单列表
-            $self.getGrabList()
-          }
-        })
+        amap.getRegeo({
+					// location: `${res.longitude},${res.latitude}`,
+				})
+					.then(address => {
+						$self.curLoaction = Object.assign({}, {
+							address: address[0].regeocodeData.formatted_address,
+							longitude: address[0].longitude,
+							latitude: address[0].latitude
+						})
+						uni.setStorageSync('city', address[0].regeocodeData.addressComponent.city)
+						console.log(address)
+						// 获取订单列表
+						$self.getGrabList()
+					})
       },
       // 获取订单列表
       getGrabList() {
         uni.request({
-          // url: `https://messagecome.com:9022/order/grabOrderList?longitude=${$self.curLoaction.longitude}&latitude=${$self.curLoaction.latitude}`,
-          url: `https://messagecome.com:9022/order/grabOrderList?longitude=113.900114&latitude=22.674341`,
+          // url: `https://messagecome.com/order/grabOrderList?longitude=${$self.curLoaction.longitude}&latitude=${$self.curLoaction.latitude}`,
+          url: `https://messagecome.com/order/grabOrderList?longitude=113.900114&latitude=22.674341`,
           method: 'POST',
-          // data: {
+          data: {
             // longitude: $self.curLoaction.longitude,
-            // latitude: $self.curLoaction.latitude
-          // }
+						// latitude: $self.curLoaction.latitude
+						longitude: '113.900034',
+						latitude: '22.674162'
+          }
         })
           .then(infoRes => {
             let [err, res] = infoRes
@@ -157,7 +167,7 @@
 				this.grabTipsShow = true
 				this.curOrderNo = item.orderNo
 				uni.request({
-					url: `https://messagecome.com:9022/order/grabOrder?orderNo=${item.orderNo}&uuid=${this.uuid}`,
+					url: `https://messagecome.com/order/grabOrder?orderNo=${item.orderNo}&uuid=${this.uuid}`,
 					method: 'POST'
 				})
 				.then(infoRes => {
@@ -185,7 +195,7 @@
 			queryDetail(orderNo) {
 				uni.request({
 					method: 'POST',
-					url: `https://messagecome.com:9022/order/orderInfo?orderNo=${orderNo}`
+					url: `https://messagecome.com/order/orderInfo?orderNo=${orderNo}`
 				}).then(infoRes => {
 					let [err, res] = infoRes
 					if (res.data && res.data.status === 1) {
@@ -232,7 +242,7 @@
       height: 160rpx;
       box-sizing: border-box;
       width: 92%;
-      padding: 0 30rpx;
+      padding: 30rpx;
       position: absolute;
       left: 4%;
       top: 90rpx;
@@ -240,19 +250,21 @@
       border-radius: 8rpx;
       background-color: #fff;
       .info {
+				height: 100%;
         flex: 1;
         .item {
           display: flex;
-          align-items: center;
-          height: 40rpx;
-          &:first-child {
-            margin-bottom: 8rpx;
-          }
+          align-items: flex-start;
+					height: 100%;
+					margin-right: 10rpx;	
           .label {
+						width: 60rpx;
             font-size: 28rpx;
             color: #808080;
+						margin-right: 10rpx;	
           }
           .text {
+						flex: 1;
             font-size: 32rpx;
             color: #4A4A4A;
           }

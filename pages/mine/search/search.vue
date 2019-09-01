@@ -14,8 +14,8 @@
 </template>
 
 <script>
-const amapFile = require('../../../lib/amap-wx.js')
 import { debounce } from '../../../utils/methods.js'
+import amap from '../../../utils/amap'
 
 let $self;
 export default {
@@ -49,18 +49,13 @@ export default {
     bindInput: function() {
       let keywords = $self.addressName
       if (!keywords.trim()) return;
-      let myAmapFun = new amapFile.AMapWX({key: '253f8eb5f9c6084e388cbd85ef0982ee'});
-      myAmapFun.getInputtips({
-        keywords,
-        type: '分类代码',
-        city: $self.city,
-        location: '',
-        success(data) {
+      let params = { keywords, type: '分类代码', city: $self.city, location: '' }
+      amap.getInputtips(params)
+        .then(data => {
           if(data && data.tips){
             $self.tips = data.tips
           }
-        }
-      })
+        })
     },
     setAddress(item) {
       uni.setStorageSync('curAddress', item)

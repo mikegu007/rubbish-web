@@ -153,16 +153,16 @@ var $self;var _default =
   },
   methods: {
     // 请求地址列表
-    queryAddList: function queryAddList() {var _this = this;
+    queryAddList: function queryAddList() {
       uni.request({
-        url: 'http://49.234.39.19:9022/user/address/list',
+        url: 'https://messagecome.com/user/address/list',
         data: {
           uuid: $self.uuid } }).
 
       then(function (infoRes) {var _infoRes = _slicedToArray(
         infoRes, 2),err = _infoRes[0],res = _infoRes[1];
         if (res.data && res.data.status === 1) {
-          _this.addressList = res.data.data;
+          $self.addressList = res.data.data;
         }
       });
     },

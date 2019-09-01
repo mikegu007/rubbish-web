@@ -1015,10 +1015,10 @@ createPage(_detail.default);
 
 /***/ }),
 
-/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2Flocation%2Flocation\"}":
-/*!*******************************************************************************************!*\
-  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2Flocation%2Flocation"} ***!
-  \*******************************************************************************************/
+/***/ "../../../../../volcano/develop/my-uniapp/main.js?{\"page\":\"pages%2Forder%2FpolyDetail%2FpolyDetail\"}":
+/*!***********************************************************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/main.js?{"page":"pages%2Forder%2FpolyDetail%2FpolyDetail"} ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1026,8 +1026,8 @@ createPage(_detail.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../volcano/develop/my-uniapp/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _location = _interopRequireDefault(__webpack_require__(/*! ./pages/order/location/location.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/location/location.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_location.default);
+var _polyDetail = _interopRequireDefault(__webpack_require__(/*! ./pages/order/polyDetail/polyDetail.vue */ "../../../../../volcano/develop/my-uniapp/pages/order/polyDetail/polyDetail.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_polyDetail.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),
@@ -1095,6 +1095,69 @@ createPage(_order.default);
 
 /***/ }),
 
+/***/ "../../../../../volcano/develop/my-uniapp/utils/amap.js":
+/*!**************************************************!*\
+  !*** E:/volcano/develop/my-uniapp/utils/amap.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var amapFile = __webpack_require__(/*! ../lib/amap-wx.js */ "../../../../../volcano/develop/my-uniapp/lib/amap-wx.js");
+// 高德开发者key
+var key = '253f8eb5f9c6084e388cbd85ef0982ee';
+var myAmapFun = new amapFile.AMapWX({ key: key });var
+
+Amap = /*#__PURE__*/function () {function Amap() {_classCallCheck(this, Amap);}_createClass(Amap, [{ key: "getPoiAround",
+    /**
+                                                                                                                           * 获取POI数据
+                                                                                                                           * @param {string} querykeywords 
+                                                                                                                           */value: function getPoiAround()
+    {var querykeywords = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      return new Promise(function (resolve, reject) {return myAmapFun.getPoiAround({ querykeywords: querykeywords, success: resolve, fail: reject });});
+    }
+
+    /**
+       * 获取地理描述数据
+       */ }, { key: "getRegeo", value: function getRegeo()
+    {
+      return new Promise(function (resolve, reject) {return myAmapFun.getRegeo({ success: resolve, fail: reject });});
+    }
+    /**
+       * 获取天气数据
+       *
+       */ }, { key: "getWeather", value: function getWeather()
+    {
+      return new Promise(function (resolve, reject) {return myAmapFun.getWeather({ success: resolve, fail: reject });});
+    }
+
+    /**
+       * 获取输入提示词
+       * @param {string} keywords 
+       * @param {string} location 
+       */ }, { key: "getInputtips", value: function getInputtips(
+    city) {var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';var keywords = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      return new Promise(function (resolve, reject) {return myAmapFun.getInputtips({ keywords: keywords, location: location, city: city, success: resolve, fail: reject });});
+    }
+
+    /**
+       * 获取路线规划
+       * type : getDrivingRoute --驾车
+       * type : getWalkingRoute --步行
+       * type : getTransitRoute --公交
+       * type : getRidingRoute --骑行
+       * @param {string} origin 
+       * @param {string} destination 
+       */ }, { key: "getRoute", value: function getRoute(
+    origin, destination, type, city) {
+      return new Promise(function (resolve, reject) {return myAmapFun[type]({ origin: origin, destination: destination, city: city, success: resolve, fail: reject });});
+    } }]);return Amap;}();var _default =
+
+
+new Amap();exports.default = _default;
+
+/***/ }),
+
 /***/ "../../../../../volcano/develop/my-uniapp/utils/constant.js":
 /*!******************************************************!*\
   !*** E:/volcano/develop/my-uniapp/utils/constant.js ***!
@@ -1103,8 +1166,9 @@ createPage(_order.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.REFRESH_ORDERING = exports.REFRESH_REMARK = void 0;var REFRESH_REMARK = 'refresh_remark';exports.REFRESH_REMARK = REFRESH_REMARK;
+Object.defineProperty(exports, "__esModule", { value: true });exports.REFRESH_ORDERLIST = exports.REFRESH_ORDERING = exports.REFRESH_REMARK = void 0;var REFRESH_REMARK = 'refresh_remark';exports.REFRESH_REMARK = REFRESH_REMARK;
 var REFRESH_ORDERING = 'refresh_ordering';exports.REFRESH_ORDERING = REFRESH_ORDERING;
+var REFRESH_ORDERLIST = 'refresh_order_List';exports.REFRESH_ORDERLIST = REFRESH_ORDERLIST;
 
 /***/ }),
 
@@ -1754,7 +1818,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7957,7 +8021,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7978,14 +8042,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8061,7 +8125,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));

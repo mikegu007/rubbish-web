@@ -67,14 +67,13 @@
 		{
 			"path" : "pages/order/addressSetting/addressSetting",
 			"style" : {
-				"navigationBarTitleText": "抢单设置"
+				"navigationBarTitleText": "导航"
 			}
 		},
 		{
-			"path" : "pages/order/location/location",
+			"path" : "pages/order/polyDetail/polyDetail",
 			"style" : {
-				"navigationBarTitleText": "定位",
-				"navigationBarBackgroundColor": "#fff"
+				"navigationBarTitleText": "路径详情"
 			}
 		},
 		{

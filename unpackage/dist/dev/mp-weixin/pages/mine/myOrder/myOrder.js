@@ -135,7 +135,7 @@ var $self;var _default =
   methods: {
     getOrderList: function getOrderList() {
       uni.request({
-        url: 'http://49.234.39.19:9022/order/myOrders',
+        url: 'https://messagecome.com/order/myOrders',
         method: 'POST',
         data: {
           "length": 10,
