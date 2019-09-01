@@ -91,8 +91,8 @@ var $self;var _default =
       provider: 'weixin',
       success: function success(loginRes) {
         if (loginRes.code) {
-          var appId = 'wx0c05632ffc644b36';
-          var appSecret = '8018b076c849cc483d07f6fe81a485f3';
+          var appId = 'wx9116e56b5cd26982';
+          var appSecret = '64e711db31d37ebb45acc7290a0eac33';
           uni.request({
             url: "https://api.weixin.qq.com/sns/jscode2session?appid=".concat(appId, "&secret=").concat(appSecret, "&js_code=").concat(loginRes.code, "&grant_type=authorization_code"),
             data: {

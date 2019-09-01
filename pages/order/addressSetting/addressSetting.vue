@@ -50,7 +50,7 @@
         ],
         tabType: 'getDrivingRoute',
         startAddress: { longtitude: '',  latitude: '' },
-        endAddress: { longtitude: '',  latitude: '', name: '', desc: '' },
+        endAddress: { longtitude: '',  latitude: '', name: '' },
         markers: [ // 起始点
           { iconPath: '/static/images/mapicon_navi_s.png', id: 1, latitude: '', longitude: '', width: 20, height: 30 },
           { iconPath: '/static/images/mapicon_navi_e.png', id: 0, latitude: '', longitude: '', width: 20, height: 30 }
@@ -73,8 +73,7 @@
         this.endAddress = Object.assign({}, {
           longtitude: +options.longtitude2,
           latitude: +options.latitude2,
-          name: options.name,
-          desc: options.desc
+          name: options.name
         })
         this.markers[0] =  Object.assign(this.markers[0], {
           longitude: +options.longtitude1,
@@ -174,8 +173,7 @@
         wx.openLocation({
           latitude: +this.endAddress.latitude,
           longitude: +this.endAddress.longtitude,
-          name: this.endAddress.name,
-          address: this.endAddress.desc
+          name: this.endAddress.name
         });
       },
       getDestination() {

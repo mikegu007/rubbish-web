@@ -1,6 +1,6 @@
 <template name="address-item">
 	<view class="address">
-		<view class="detail">
+		<view class="detail" @tap="confirm">
 			<image v-if="item.defaultAddress" class="address-img" src="/static/images/cur-address.png"></image>
 			<view class="info">
 				<view class="buildings">{{ item.address }}</view>
@@ -31,6 +31,9 @@
 		onReady() {
 		},
 		methods: {
+			confirm() {
+				this.$emit('confirm', this.item)
+			},
 			edit() {
 				this.$emit('eidt', this.item)
 			}

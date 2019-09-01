@@ -1,6 +1,6 @@
 <template name="grab-order">
   <view class="grab-order-wrapper">
-    <view class="location" @tap="goAddSetting">
+    <view class="location" @tap="goSearch">
       <view class="info">
         <view class="item">
           <text class="label">我的定位</text>
@@ -13,7 +13,7 @@
       </view>
       <image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
     </view>
-    <grab-list :list="grabData" @grab="grab" @check-detail="checkDetail"></grab-list>
+    <grab-list :list="grabData" @grab="grab" @check-detail="checkDetail" @nav="goNav"></grab-list>
     <view class="mask" v-if="grabTipsShow || orderDetailShow">
 			<view class="middle order-info" v-if="grabTipsShow">
 				<image class="suc-pic" src="/static/images/success-orange.png"></image>
@@ -72,6 +72,7 @@
 <script>
 	import GrabList from '../../../components/grabList.vue'
 	import amap from '../../../utils/amap'
+	import { REFRESH_CURLOCATION } from '../../../utils/constant.js'
 	
 	let $self
   export default {
@@ -91,9 +92,7 @@
 					address: ''
         },
         // 抢单列表
-				grabData: [
-					// { avator: '/static/images/user.png', location: '逸仙路2816号 华滋奔腾大厦B座', num: 3, type: 1, id: 0 }
-        ],
+				grabData: [],
         curOrderDetail: {}, // 当前订单明细
 				curOrderNo: ''
       }
@@ -102,23 +101,43 @@
 			$self = this
 			this.uuid = uni.getStorageSync('uuid')
 			this.userInfo = uni.getStorageSync('userInfo').userInfo
-      this.getCurLocation()
+			this.getCurLocation()
+
+			this.$eventBus.$on(REFRESH_CURLOCATION, (params) => {
+				if (params) {
+					let tudeArr = params.location.split(',')
+					this.curLoaction = Object.assign({}, {
+						address: `${params.district}${params.name}`,
+						longitude: tudeArr[0],
+						latitude: tudeArr[1]
+					})
+					uni.removeStorageSync('curAddress')
+					// 获取订单列表
+					this.getGrabList()
+				} else {
+      		this.getCurLocation()
+				}
+			})
     },
     methods: {
-			goAddSetting() {
-				let latitude2 = 22.674162
-				let longtitude2 = 113.900034
-				let name = 'hhhhhh'
-				let desc = 'ggggg'
+			// 重新定位当前地址
+			goSearch() {
 				uni.navigateTo({
-					url: `../order/addressSetting/addressSetting?longtitude1=${$self.curLoaction.longitude}&latitude1=${$self.curLoaction.latitude}&longtitude2=${longtitude2}&latitude2=${latitude2}&name=${name}$desc=${desc}`
+					url: '../mine/search/search?fromOrder=0'
+				})
+			},
+			// 去导航
+			goNav(item) {
+				let latitude2 = item.latitude
+				let longtitude2 = item.longitude
+				let name = item.addressName
+				uni.navigateTo({
+					url: `../order/addressSetting/addressSetting?longtitude1=${$self.curLoaction.longitude}&latitude1=${$self.curLoaction.latitude}&longtitude2=${longtitude2}&latitude2=${latitude2}&name=${name}`
 				})
       },
       // 获取当前经纬度
       getCurLocation() {
-        amap.getRegeo({
-					// location: `${res.longitude},${res.latitude}`,
-				})
+        amap.getRegeo({})
 					.then(address => {
 						$self.curLoaction = Object.assign({}, {
 							address: address[0].regeocodeData.formatted_address,
@@ -130,19 +149,13 @@
 						// 获取订单列表
 						$self.getGrabList()
 					})
-      },
+			},
       // 获取订单列表
       getGrabList() {
         uni.request({
-          // url: `https://messagecome.com/order/grabOrderList?longitude=${$self.curLoaction.longitude}&latitude=${$self.curLoaction.latitude}`,
-          url: `https://messagecome.com/order/grabOrderList?longitude=113.900114&latitude=22.674341`,
-          method: 'POST',
-          data: {
-            // longitude: $self.curLoaction.longitude,
-						// latitude: $self.curLoaction.latitude
-						longitude: '113.900034',
-						latitude: '22.674162'
-          }
+          url: `https://messagecome.com/order/grabOrderList?longitude=${$self.curLoaction.longitude}&latitude=${$self.curLoaction.latitude}`,
+          // url: `https://messagecome.com/order/grabOrderList?longitude=113.900114&latitude=22.674341`,
+          method: 'POST'
         })
           .then(infoRes => {
             let [err, res] = infoRes
@@ -175,6 +188,7 @@
 					console.log(res)
 					if (res.data && res.data.status === 1) {
 						$self.grabTipsShow = show
+						item.orderStatus === 2
 					}
 				})
 			},

@@ -16,7 +16,7 @@
 	import PlaceOrder from '../order/placeOrder/placeOrder.vue'
 	import GenOrder from '../order/genOrder/genOrder.vue'
 	import GrabOrder from '../order/grabOrder/grabOrder.vue'
-	import { REFRESH_ORDERING, REFRESH_ORDERLIST } from '../../utils/constant.js'
+	import { REFRESH_ORDERING, REFRESH_ORDERLIST, REFRESH_CURLOCATION } from '../../utils/constant.js'
 
 	let $self;
 	export default {
@@ -39,7 +39,14 @@
 			this.$eventBus.$on(REFRESH_ORDERING, this.refreshOrderStatus)
 		},
 		onShow() {
-			this.$eventBus.$emit(REFRESH_ORDERLIST)
+			// console.log('show')
+			if (this.activeIndex === 0) {
+				let checkAddress = uni.getStorageSync('checkAddress') || null
+				this.$eventBus.$emit(REFRESH_ORDERLIST, checkAddress)
+			} else {
+				let curAddress = uni.getStorageSync('curAddress') || null
+				this.$eventBus.$emit(REFRESH_CURLOCATION, curAddress)
+			}
 		},
 		methods: {
 			// 切换 下单 订单

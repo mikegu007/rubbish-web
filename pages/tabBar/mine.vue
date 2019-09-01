@@ -162,7 +162,7 @@
 							amap.getRegeo({})
 								.then(address => {
 									let city = address[0].regeocodeData.addressComponent.city
-									uni.setStorageSync('curCity', city)
+									uni.setStorageSync('city', city)
 								})
 								
 							uni.navigateTo({

@@ -1,5 +1,3 @@
-import md5 from '../lib/md5.js'
-
 /**
  * 防抖
  * @param {*} fn 执行的方法
@@ -24,19 +22,19 @@ function debounce(fn, wait) {
 function getRandomString(len) {
   let originalStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', str = '', index = 0
   for (let i = 0; i < len; i++) {
-    index = Math.floor(Math.random() * str.length)
+    index = Math.floor(Math.random() * originalStr.length)
     str += originalStr[index]
   }
   return str
 }
 
-function genSign(param = {}) {
+function genString(param = {}) {
   let keys = Object.keys(param).sort()
   let strArr = []
   for (let key of keys) {
-    strArr.push(`key=${param[key]}`)
+    strArr.push(`${key}=${param[key]}`)
   }
-  return md5(strArr.join('&'))
+  return strArr.join('&')
  }
 
 /**
@@ -92,4 +90,4 @@ function getLocationSetting(callback) {
   })
 }
 
-export { debounce, getLocationSetting, getRandomString, genSign }
+export { debounce, getLocationSetting, getRandomString, genString }

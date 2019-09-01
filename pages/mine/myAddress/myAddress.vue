@@ -3,13 +3,13 @@
 		<!-- 默认地址 -->
 		<view class="default" v-if="defaultAddress">
 			<view class="title">默认地址</view>
-			<address-item :item="defaultAddress" @eidt="goEdit(defaultAddress)"></address-item>
+			<address-item :item="defaultAddress" @confirm="checkItem" @eidt="goEdit"></address-item>
 		</view>
 		<!-- 其他地址列表 -->
 		<view v-if="otherAddressList.length" class="others">
 			<view class="title">其他地址</view>
 			<view class="list">
-				<address-item class="other" v-for="item in otherAddressList" :item="item" :key="item.id" @eidt="goEdit(item)"></address-item>
+				<address-item class="other" v-for="item in otherAddressList" :item="item" :key="item.id" @confirm="checkItem"  @eidt="goEdit"></address-item>
 			</view>
 		</view>
 		<tips v-if="!addressList.length" :tips="tips"></tips>
@@ -35,7 +35,8 @@
 			return {
 				uuid: '',
 				tips: '没找到地址，请新增地址!',
-				addressList: [] // 返回的地址列表
+				addressList: [], // 返回的地址列表
+				fromOrder: ''
 			};
 		},
 		computed: {
@@ -44,6 +45,11 @@
 			},
 			otherAddressList() {
 				return this.addressList.filter(item => !item.defaultAddress)
+			}
+		},
+		onLoad(options) {
+			if (JSON.stringify(options) !== '{}') {
+				this.fromOrder = options.fromOrder
 			}
 		},
 		onShow() {
@@ -65,6 +71,12 @@
 						$self.addressList = res.data.data
 					}
 				})
+			},
+			checkItem(address) {
+				if (this.fromOrder === '0') {
+					uni.setStorageSync('checkAddress', address)
+					uni.navigateBack({})
+				}
 			},
 			// 编辑地址
 			goEdit(address) {

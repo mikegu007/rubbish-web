@@ -135,8 +135,9 @@ var $self;var _default =
     return {
       uuid: '',
       tips: '没找到地址，请新增地址!',
-      addressList: [] // 返回的地址列表
-    };
+      addressList: [], // 返回的地址列表
+      fromOrder: '' };
+
   },
   computed: {
     defaultAddress: function defaultAddress() {
@@ -146,6 +147,11 @@ var $self;var _default =
       return this.addressList.filter(function (item) {return !item.defaultAddress;});
     } },
 
+  onLoad: function onLoad(options) {
+    if (JSON.stringify(options) !== '{}') {
+      this.fromOrder = options.fromOrder;
+    }
+  },
   onShow: function onShow() {
     $self = this;
     this.uuid = uni.getStorageSync('uuid');
@@ -165,6 +171,12 @@ var $self;var _default =
           $self.addressList = res.data.data;
         }
       });
+    },
+    checkItem: function checkItem(address) {
+      if (this.fromOrder === '0') {
+        uni.setStorageSync('checkAddress', address);
+        uni.navigateBack({});
+      }
     },
     // 编辑地址
     goEdit: function goEdit(address) {

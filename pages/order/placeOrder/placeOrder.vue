@@ -66,7 +66,8 @@
 	import Number from '../../../components/number.vue'
 	import vCheckbox from '../../../components/vCheckbox.vue'
 	import { REFRESH_REMARK, REFRESH_ORDERLIST } from '../../../utils/constant.js'
-	import { getRandomString, genSign } from '../../../utils/methods.js'
+	import { getRandomString, genString } from '../../../utils/methods.js'
+	import md5 from '../../../lib/md5.js'
 	// import GenOrder from '../genOrder/genOrder.vue'
 
 	let $self
@@ -101,7 +102,9 @@
 					total: 0, // 合计
 					remark: '', // 备注
 					allowed: false, // 复选框
-				}
+				},
+				prepareNo: '',
+				orderNo: ''
 			}
 		},
 		onReady() {
@@ -109,11 +112,31 @@
 			this.loadHandle()
 			// 监听备注字段的刷新
 			this.$eventBus.$on(REFRESH_REMARK, this.refreshRemark)
-			this.$eventBus.$on(REFRESH_ORDERLIST, () => {
-				this.loadHandle()
+			this.$eventBus.$on(REFRESH_ORDERLIST, (param) => {
+				if (!param) {
+					this.loadHandle()
+				} else {
+					this.placeOrderInfo = Object.assign(this.placeOrderInfo, {
+						name: param.name,
+						mobile: param.mobile,
+						addressId: param.id,
+						address: param.address,
+						addressDetail: param.addressDetail,
+						longitude: param.longitude,
+						latitude: param.latitude
+					})
+					uni.removeStorageSync('checkAddress')
+				}
 			})
 		},
 		methods: {
+			// 加载
+			loadHandle() {
+				let uuid = uni.getStorageSync('uuid')
+				this.uuid = uuid ? uuid : ''
+				this.queryAddList()
+				this.queryPacket()
+			},
 			// 请求地址列表
 			queryAddList() {
 				uni.request({
@@ -169,18 +192,11 @@
 			// 去定位界面
 			goSearch() {
 				uni.navigateTo({
-					url: '../../mine/search/search'
+					url: '../mine/myAddress/myAddress?fromOrder=0'
 				})
 			},
 			refreshRemark(remark) {
 				this.placeOrderInfo.remark = remark
-			},
-			// 加载
-			loadHandle() {
-				let uuid = uni.getStorageSync('uuid')
-				this.uuid = uuid ? uuid : ''
-				this.queryAddList()
-				this.queryPacket()
 			},
 			increaseNum(opt) {
 				// console.log(opt)
@@ -219,27 +235,22 @@
 				})
 					.then(infoRes => {
 						let [err, res] = infoRes
-						console.log(infoRes)
 						if (res.data && res.data.status === 1) {
 						}
 					})
 			},
 			// 提交订单
 			submitOrder() {
-				// if (!this.placeOrderInfo.smallNum || !this.placeOrderInfo.middleNum || !this.placeOrderInfo.bigNum) {
-				// 	uni.showToast({
-				// 		icon: 'none',
-				// 		title: '请至少选择一个袋子',
-				// 		duration: 1000
-				// 	})
-				// 	return
-				// }
+				debugger
+				if (!this.placeOrderInfo.smallNum || !this.placeOrderInfo.middleNum || !this.placeOrderInfo.bigNum) {
+					uni.showToast({ icon: 'none', title: '请至少选择一个袋子', duration: 1000 })
+					return
+				}
 				let fields = {
 					smallNum: { name: '小', type: 2 },
 					middleNum: { name: '中', type: 1 }, 
 					bigNum: { name: '大', type: 0 }
 				}
-				
 				let orderDetailDtos = []
 				for (let field of Object.keys(fields)) {
 					let obj = {}
@@ -267,20 +278,43 @@
 				})
 					.then(data => {
 						let [err, res] = data
-						console.log(data)
+						// console.log(data)
 						if (res.data && res.data.status === 1) {
+							$self.prepareNo = res.data.data.preOrderNo
+							$self.orderNo = res.data.data.orderNo
 							$self.queryWxOrderNo()
 							// $self.$emit('submit')
-							// let payParams = {
-							// 	provider: 'wxpay',
-							// 	timeStamp: String(+new Date()),
-							// 	nonceStr: getRandomString(16),
-							// 	package: 'prepay_id=',
-							// 	signType: 'MD5'
-							// }
-							// let paySign = genSign(payParams)
-							// Object.assign(payParams, { paySign })
-							// uni.requestPayment(payParams)
+							let payParams = {
+								appId: 'wx9116e56b5cd26982',
+								timeStamp: String(+new Date()),
+								nonceStr: getRandomString(32),
+								package: `prepay_id=${$self.prepareNo}`,
+								signType: 'MD5',
+							}
+							// debugger
+							let paySign = genString(payParams)
+							paySign = md5(`${paySign}&key=zhengyiProductor123456789product`).toUpperCase()
+							payParams = Object.assign({}, {
+								provider: 'wxpay',
+								timeStamp: payParams.timeStamp,
+								nonceStr: payParams.nonceStr,
+								package: payParams.package,
+								signType: 'MD5',
+								paySign
+							})
+							console.log(payParams)
+							uni.requestPayment(payParams)
+								.then(infoRes => {
+									console.log(infoRes)
+									let [err, res] = infoRes
+									if (!err && res.errMsg === 'requestPayment:ok') {
+										uni.showToast({ icon: 'success', title: '支付成功', duration: 1000 })
+										uni.request({
+											url: `https://messagecome.com/order/payRollback?orderNo=${$self.orderNo}`,
+											method: 'POST'
+										})
+									}
+								})
 						}
 					})
 			}

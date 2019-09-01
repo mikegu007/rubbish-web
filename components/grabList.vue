@@ -15,7 +15,7 @@
       <view class="status">
         <view v-if="item.orderStatus === 2" class="grabing extend-click" @tap.stop="grab(item)">抢单</view>
         <view v-if="item.orderStatus === 1" class="success">抢单成功</view>
-        <view class="success">去这里</view>
+        <view class="success" @tap.stop="goNav">去这里</view>
       </view>
     </view>
   </view>
@@ -36,6 +36,9 @@
       },
       checkDetail(item) {
         this.$emit('check-detail', item)
+      },
+      goNav() {
+        this.$emit('nav', item)
       }
     }
   }

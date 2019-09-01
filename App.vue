@@ -10,8 +10,8 @@
 				provider: 'weixin',
 				success: function (loginRes) {
 					if (loginRes.code) {
-						let appId = 'wx0c05632ffc644b36'
-						let appSecret = '8018b076c849cc483d07f6fe81a485f3'
+						let appId = 'wx9116e56b5cd26982'
+						let appSecret = '64e711db31d37ebb45acc7290a0eac33'
 						uni.request({
 							url: `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${appSecret}&js_code=${loginRes.code}&grant_type=authorization_code`,
 							data: {

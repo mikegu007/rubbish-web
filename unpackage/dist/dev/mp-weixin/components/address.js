@@ -131,6 +131,9 @@ var _default =
   onReady: function onReady() {
   },
   methods: {
+    confirm: function confirm() {
+      this.$emit('confirm', this.item);
+    },
     edit: function edit() {
       this.$emit('eidt', this.item);
     } } };exports.default = _default;

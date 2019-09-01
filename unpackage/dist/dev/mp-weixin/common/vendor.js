@@ -1166,9 +1166,10 @@ new Amap();exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.REFRESH_ORDERLIST = exports.REFRESH_ORDERING = exports.REFRESH_REMARK = void 0;var REFRESH_REMARK = 'refresh_remark';exports.REFRESH_REMARK = REFRESH_REMARK;
+Object.defineProperty(exports, "__esModule", { value: true });exports.REFRESH_CURLOCATION = exports.REFRESH_ORDERLIST = exports.REFRESH_ORDERING = exports.REFRESH_REMARK = void 0;var REFRESH_REMARK = 'refresh_remark';exports.REFRESH_REMARK = REFRESH_REMARK;
 var REFRESH_ORDERING = 'refresh_ordering';exports.REFRESH_ORDERING = REFRESH_ORDERING;
 var REFRESH_ORDERLIST = 'refresh_order_List';exports.REFRESH_ORDERLIST = REFRESH_ORDERLIST;
+var REFRESH_CURLOCATION = 'refresh_curlocation';exports.REFRESH_CURLOCATION = REFRESH_CURLOCATION;
 
 /***/ }),
 
@@ -1180,13 +1181,11 @@ var REFRESH_ORDERLIST = 'refresh_order_List';exports.REFRESH_ORDERLIST = REFRESH
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.debounce = debounce;exports.getLocationSetting = getLocationSetting;exports.getRandomString = getRandomString;exports.genSign = genSign;var _md = _interopRequireDefault(__webpack_require__(/*! ../lib/md5.js */ "../../../../../volcano/develop/my-uniapp/lib/md5.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-/**
-                                                                                                                                                                                                                                                                                                                                                                                     * 防抖
-                                                                                                                                                                                                                                                                                                                                                                                     * @param {*} fn 执行的方法
-                                                                                                                                                                                                                                                                                                                                                                                     * @param {*} wait 时间
-                                                                                                                                                                                                                                                                                                                                                                                     */
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.debounce = debounce;exports.getLocationSetting = getLocationSetting;exports.getRandomString = getRandomString;exports.genString = genString; /**
+                                                                                                                                                                                                                                 * 防抖
+                                                                                                                                                                                                                                 * @param {*} fn 执行的方法
+                                                                                                                                                                                                                                 * @param {*} wait 时间
+                                                                                                                                                                                                                                 */
 function debounce(fn, wait) {
   var timer = null;
   return function () {
@@ -1206,19 +1205,19 @@ function debounce(fn, wait) {
 function getRandomString(len) {
   var originalStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',str = '',index = 0;
   for (var i = 0; i < len; i++) {
-    index = Math.floor(Math.random() * str.length);
+    index = Math.floor(Math.random() * originalStr.length);
     str += originalStr[index];
   }
   return str;
 }
 
-function genSign() {var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+function genString() {var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var keys = Object.keys(param).sort();
   var strArr = [];var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
     for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var key = _step.value;
-      strArr.push("key=".concat(param[key]));
+      strArr.push("".concat(key, "=").concat(param[key]));
     }} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return != null) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
-  return (0, _md.default)(strArr.join('&'));
+  return strArr.join('&');
 }
 
 /**

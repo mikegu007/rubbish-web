@@ -22,21 +22,24 @@ export default {
   data() {
     return {
       tips: [],
-      showCity: false,
-      city: '',
-      addressName: '',
-      addressLocation: '',
-      $inputHandle: null
+      showCity: false, // 显示城市
+      city: '', // 城市关键词
+      addressName: '', // 搜索地址
+      $inputHandle: null,
+      fromOrder: ''
     }
   },
   onLoad(options) {
-    $self = this;
+    $self = this
+    // 绑定搜索方法
     this.$inputHandle = debounce(this.bindInput, 300)
-    let city = uni.getStorageSync('curCity')
+    let city = uni.getStorageSync('city')
     this.city = city ? city : ''
     if (JSON.stringify(options) !== '{}') {
-      this.addressName = options.address
-      this.$inputHandle()
+      if (options.address) {
+        this.addressName = options.address
+        this.$inputHandle()
+      }
     }
   },
   methods: {
@@ -49,8 +52,8 @@ export default {
     bindInput: function() {
       let keywords = $self.addressName
       if (!keywords.trim()) return;
-      let params = { keywords, type: '分类代码', city: $self.city, location: '' }
-      amap.getInputtips(params)
+      // let params = { keywords, type: '分类代码', city: $self.city, location: '' }
+      amap.getInputtips($self.city, '', keywords)
         .then(data => {
           if(data && data.tips){
             $self.tips = data.tips
