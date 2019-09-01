@@ -59,6 +59,5 @@
       "desc": "需要获取您的地理位置，请确认授权"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap91.json"
+  "usingComponents": {}
 }
