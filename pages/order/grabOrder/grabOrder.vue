@@ -14,6 +14,7 @@
       <image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
     </view>
     <grab-list :list="grabData" @grab="grab" @check-detail="checkDetail" @nav="goNav"></grab-list>
+		<tips v-if="!grabData.length" :tips="tips"></tips>
     <view class="mask" v-if="grabTipsShow || orderDetailShow">
 			<view class="middle order-info" v-if="grabTipsShow">
 				<image class="suc-pic" src="/static/images/success-orange.png"></image>
@@ -71,14 +72,16 @@
 
 <script>
 	import GrabList from '../../../components/grabList.vue'
-	import amap from '../../../utils/amap'
+	import Tips from '../../../components/tips.vue'
 	import { REFRESH_CURLOCATION } from '../../../utils/constant.js'
+	import amap from '../../../utils/amap'
 	
 	let $self
   export default {
     name: 'grab-order',
     components: {
-      'grab-list': GrabList
+			'grab-list': GrabList,
+			'tips': Tips
     },
     data() {
       return {
@@ -94,7 +97,8 @@
         // 抢单列表
 				grabData: [],
         curOrderDetail: {}, // 当前订单明细
-				curOrderNo: ''
+				curOrderNo: '',
+				tips: '附近没有订单'
       }
     },
     onReady() {

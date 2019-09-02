@@ -82,7 +82,7 @@ export default {
       background-color: #fff;
       font-size: 28rpx;
       .city-ipt {
-        width: 200rpx;
+        width: 230rpx;
         color: #8E8E93;
         &.city-width {
           width: 120rpx;

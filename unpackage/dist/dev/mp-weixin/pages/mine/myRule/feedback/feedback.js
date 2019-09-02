@@ -181,9 +181,12 @@ __webpack_require__.r(__webpack_exports__);
         infoRes, 2),err = _infoRes[0],res = _infoRes[1];
         if (res.data && res.data.status === 1) {
           uni.showToast({
-            title: '提交成功' });
+            title: '提交成功',
+            duration: 2000,
+            success: function success() {
+              uni.navigateBack({});
+            } });
 
-          uni.navigateBack({});
         }
       });
     } } };exports.default = _default;

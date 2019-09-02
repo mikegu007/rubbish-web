@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/tabBar/order",
     "pages/index/index",
+    "pages/tabBar/order",
     "pages/tabBar/mine",
     "pages/index/rank/rank",
     "pages/index/updatings/updatings",
@@ -35,16 +35,16 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/tabBar/order",
-        "iconPath": "static/images/tabBar-myOrder.png",
-        "selectedIconPath": "static/images/tabBar-myOrder-active.png",
-        "text": "订单"
-      },
-      {
         "pagePath": "pages/index/index",
         "iconPath": "static/images/tabBar-index.png",
         "selectedIconPath": "static/images/tabBar-index-active.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabBar/order",
+        "iconPath": "static/images/tabBar-myOrder.png",
+        "selectedIconPath": "static/images/tabBar-myOrder-active.png",
+        "text": "订单"
       },
       {
         "pagePath": "pages/tabBar/mine",

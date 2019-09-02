@@ -2,7 +2,7 @@
 <template name="place-order">
 	<view class="place-order-wrapper">
 		<!-- 定位信息 -->
-		<view class="location">
+		<view class="location" @tap="goSearch">
 			<view class="info">
 				<view class="address">
 					<text class="road">{{ placeOrderInfo.address || '' }}</text>
@@ -13,7 +13,7 @@
 					<text class="moblie">{{ placeOrderInfo.mobile || '' }}</text>
 				</view>
 			</view>
-			<image class="indictor extend-click" src="/static/images/arrow-right.png" @tap="goSearch"></image>
+			<image class="indictor extend-click" src="/static/images/arrow-right.png"></image>
 		</view>
 		<!-- 订单内容 -->
 		<view class="place-order-content">
@@ -132,10 +132,21 @@
 		methods: {
 			// 加载
 			loadHandle() {
-				let uuid = uni.getStorageSync('uuid')
-				this.uuid = uuid ? uuid : ''
-				this.queryAddList()
-				this.queryPacket()
+				let timer
+				this.uuid = uni.getStorageSync('uuid')
+				if (!this.uuid) {
+					timer = setInterval(() => {
+						this.uuid = uni.getStorageSync('uuid')
+						if (this.uuid) {
+							this.queryAddList()
+							this.queryPacket()
+							clearInterval(timer)
+						}
+					}, 2000)
+				} else {
+					this.queryAddList()
+					this.queryPacket()
+				}
 			},
 			// 请求地址列表
 			queryAddList() {
@@ -241,8 +252,7 @@
 			},
 			// 提交订单
 			submitOrder() {
-				debugger
-				if (!this.placeOrderInfo.smallNum || !this.placeOrderInfo.middleNum || !this.placeOrderInfo.bigNum) {
+				if (!this.placeOrderInfo.smallNum && !this.placeOrderInfo.middleNum && !this.placeOrderInfo.bigNum) {
 					uni.showToast({ icon: 'none', title: '请至少选择一个袋子', duration: 1000 })
 					return
 				}

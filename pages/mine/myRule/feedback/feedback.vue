@@ -81,9 +81,12 @@
 					let [err, res] = infoRes
 					if (res.data && res.data.status === 1) {
 						uni.showToast({
-							title: '提交成功'
+							title: '提交成功',
+							duration: 2000,
+							success() {
+								uni.navigateBack({})
+							}
 						})
-						uni.navigateBack({})
 					}
 				})
 			}

@@ -1,17 +1,17 @@
 {
 	"pages": [
 		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "环保家园"
+			}
+		},
+		{
 			"path" : "pages/tabBar/order",
 			"style" : {
 				"navigationBarTitleText": "订单",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#1DA06E"
-			}
-		},
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "环保家园"
 			}
 		},
 		{
@@ -138,15 +138,15 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/tabBar/order",
-			"iconPath": "static/images/tabBar-myOrder.png",
-			"selectedIconPath": "static/images/tabBar-myOrder-active.png",
-			"text": "订单"
-		}, {
 			"pagePath": "pages/index/index",
 			"iconPath": "static/images/tabBar-index.png",
 			"selectedIconPath": "static/images/tabBar-index-active.png",
 			"text": "首页"
+		}, {
+			"pagePath": "pages/tabBar/order",
+			"iconPath": "static/images/tabBar-myOrder.png",
+			"selectedIconPath": "static/images/tabBar-myOrder-active.png",
+			"text": "订单"
 		}, {
 			"pagePath": "pages/tabBar/mine",
 			"iconPath": "static/images/tabBar-mine.png",
